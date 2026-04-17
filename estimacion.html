@@ -92,29 +92,30 @@
     .legend-dot.future { background: var(--warning); }
 
     /* ===== FLOATING NAV ===== */
+    .container { position: relative; }
     .float-nav {
       position: fixed;
-      left: 1.5rem;
       top: 50%;
       transform: translateY(-50%);
+      margin-left: -210px;
       z-index: 100;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 10px 6px;
-      max-width: 160px;
+      padding: 14px 10px;
+      width: 195px;
     }
     .float-nav a {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
+      gap: 8px;
+      padding: 7px 12px;
       border-radius: 6px;
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       color: var(--muted);
       transition: background 0.15s, color 0.15s;
       white-space: nowrap;
@@ -124,8 +125,8 @@
       color: var(--text);
     }
     .float-nav a .fn-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -137,10 +138,10 @@
     .float-nav .fn-sep {
       height: 1px;
       background: var(--border);
-      margin: 4px 10px;
+      margin: 6px 12px;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1350px) {
       .float-nav { display: none; }
     }
 
@@ -158,6 +159,7 @@
   <a href="#resumen"><span class="fn-dot meta"></span> Resumen</a>
   <div class="fn-sep"></div>
   <a href="#mod-capa0"><span class="fn-dot base"></span> Capa 0</a>
+  <a href="#mod-factubat"><span class="fn-dot" style="background:#34d399;"></span> FactuBat &#10003;</a>
   <a href="#mod-facturacion"><span class="fn-dot core"></span> Facturacion</a>
   <a href="#mod-presupuestos"><span class="fn-dot core"></span> Presupuestos</a>
   <a href="#mod-dashboards"><span class="fn-dot core"></span> Dashboards</a>
@@ -185,8 +187,8 @@
       <div class="label">Modulos totales</div>
     </div>
     <div class="summary-card">
-      <div class="value">220-325</div>
-      <div class="label">Horas estimadas (total)</div>
+      <div class="value">250</div>
+      <div class="label">Horas de desarrollo</div>
     </div>
     <div class="summary-card">
       <div class="value">3</div>
@@ -194,10 +196,194 @@
     </div>
   </div>
 
+  <!-- RESUMEN RAPIDO -->
+  <div id="resumen" style="margin-bottom:2.5rem;">
+    <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem;">Resumen</h3>
+
+    <!-- FactuBat -->
+    <a href="#mod-factubat" style="text-decoration:none; display:block;">
+      <div style="display:flex; align-items:center; gap:14px; padding:14px 18px; background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2); border-left:4px solid #34d399; border-radius:10px; margin-bottom:8px;">
+        <div style="flex:1;">
+          <div style="font-weight:700; font-size:1rem; color:var(--text);">FactuBat &mdash; Bandeja de entrada + Extraccion IA</div>
+          <div style="font-size:0.8rem; color:var(--muted); margin-top:2px;">Watcher, extraccion LLM, validacion, archivo, exportacion Excel, multi-empresa</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:800; font-size:1.1rem; color:var(--text);">28h</div>
+          <div style="font-size:0.72rem; color:#34d399; font-weight:600;">Completado</div>
+          <div style="font-size:0.72rem; color:#fbbf24; font-weight:600;">Pend. aceptacion</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Módulos por contratar -->
+    <div style="display:flex; flex-direction:column; gap:6px;">
+
+      <a href="#mod-capa0" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--primary); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Capa 0 &mdash; Base del sistema</div>
+            <div style="font-size:0.78rem; color:var(--muted);">BD unificada, 6 empresas, usuarios, permisos, API, autenticacion</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">18h</div>
+            <span style="background:rgba(59,130,246,0.15); color:#60a5fa; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Cimiento</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-facturacion" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Facturacion completa</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Recibidas + emitidas, cobros parciales, 3 tipos cliente, FacturaE/FACE</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">38h</div>
+            <span style="background:rgba(16,185,129,0.15); color:#34d399; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Core</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-presupuestos" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Gestion de presupuestos</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Ciclo de vida, estados, conversion a obra, tasa de conversion</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">16h</div>
+            <span style="background:rgba(16,185,129,0.15); color:#34d399; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Core</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-dashboards" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Dashboards de visibilidad</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Dashboard grupo, empresa, obras (pipeline), obra individual con margen</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">22h</div>
+            <span style="background:rgba(16,185,129,0.15); color:#34d399; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Core</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-obras" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Gestion de obras</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Estados, albaranes, imputacion gastos, documentos, hitos, fotos</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">35h</div>
+            <span style="background:rgba(16,185,129,0.15); color:#34d399; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Core</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-operarios" style="text-decoration:none; display:block; opacity:0.7;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--warning); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Operarios</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Fichas, cursos, PRL, reconocimientos medicos, asignacion a obras</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">22h</div>
+            <span style="background:rgba(245,158,11,0.15); color:#fbbf24; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Ampliacion</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-vehiculos" style="text-decoration:none; display:block; opacity:0.7;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--warning); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Vehiculos y maquinaria</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Flota, seguros, gastos, imputacion a obras, alertas ITV</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">14h</div>
+            <span style="background:rgba(245,158,11,0.15); color:#fbbf24; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Ampliacion</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-amianto" style="text-decoration:none; display:block; opacity:0.7;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--warning); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Desamiantado (regulatorio)</div>
+            <div style="font-size:0.78rem; color:var(--muted);">9 secciones RERA, gestion residuos, vertederos, checklist cumplimiento</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">22h</div>
+            <span style="background:rgba(245,158,11,0.15); color:#fbbf24; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Ampliacion</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#mod-migracion" style="text-decoration:none; display:block;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--primary); border-radius:10px;">
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text);">Migracion de datos existentes</div>
+            <div style="font-size:0.78rem; color:var(--muted);">Lectura carpetas S:\, clasificacion automatica, importacion, informe</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text);">35h</div>
+            <span style="background:rgba(59,130,246,0.15); color:#60a5fa; padding:2px 8px; border-radius:10px; font-size:0.68rem; font-weight:600;">Cimiento</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Total -->
+    <div style="display:flex; justify-content:flex-end; align-items:baseline; gap:12px; margin-top:16px; padding-top:16px; border-top:2px solid var(--border);">
+      <span style="font-size:0.9rem; color:var(--muted);">Total proyecto:</span>
+      <span style="font-size:1.5rem; font-weight:800; color:var(--primary);">250h</span>
+    </div>
+  </div>
+
   <div class="legend">
     <div class="legend-item"><div class="legend-dot base"></div> Cimiento (obligatorio)</div>
     <div class="legend-item"><div class="legend-dot core"></div> Core (prioridad)</div>
     <div class="legend-item"><div class="legend-dot future"></div> Ampliacion</div>
+  </div>
+
+  <!-- MODULE FACTUBAT (ya existente) -->
+  <div class="module" id="mod-factubat" style="border-left:4px solid #34d399; background:rgba(16,185,129,0.03);">
+    <div class="module-header">
+      <div class="module-title">FactuBat &mdash; Bandeja de entrada + Extraccion IA</div>
+      <div class="module-badge" style="background:rgba(16,185,129,0.15); color:#34d399;">Ya desarrollado</div>
+    </div>
+    <div class="module-desc">
+      Sistema de ingesta automatica de facturas recibidas. Watcher de carpetas, extraccion de datos
+      mediante inteligencia artificial (LLM), validacion por el usuario, archivo automatico y exportacion a Excel.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Watcher de carpetas</li>
+        <li>Extraccion LLM (lineas, IVA, refs. albaran)</li>
+        <li>Validacion y correccion</li>
+        <li>Deteccion de duplicados</li>
+        <li>Division de PDFs multipagina</li>
+        <li>Archivo automatico</li>
+        <li>Exportacion Excel</li>
+        <li>Gestion de proveedores</li>
+        <li>Multi-empresa</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">28</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill" style="width:100%; background:#34d399;"></div></div>
+      </div>
+      <div class="module-deps" style="color:#fbbf24; font-weight:600;">Completado &mdash; Pendiente de aceptacion</div>
+    </div>
   </div>
 
   <!-- MODULE 0: CAPA 0 -->
@@ -223,11 +409,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">25-35</div>
+        <div class="hours">18</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill base" style="width:13%"></div></div>
+        <div class="bar-container"><div class="bar-fill base" style="width:7%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Ninguna</span></div>
     </div>
@@ -260,11 +446,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">35-50</div>
+        <div class="hours">38</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill core" style="width:18%"></div></div>
+        <div class="bar-container"><div class="bar-fill core" style="width:15%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0</span></div>
     </div>
@@ -292,11 +478,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">15-25</div>
+        <div class="hours">16</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill core" style="width:9%"></div></div>
+        <div class="bar-container"><div class="bar-fill core" style="width:6%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0</span></div>
     </div>
@@ -326,11 +512,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">25-35</div>
+        <div class="hours">22</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill core" style="width:13%"></div></div>
+        <div class="bar-container"><div class="bar-fill core" style="width:9%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0 + Facturacion</span></div>
     </div>
@@ -359,11 +545,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">35-50</div>
+        <div class="hours">35</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill core" style="width:18%"></div></div>
+        <div class="bar-container"><div class="bar-fill core" style="width:14%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0 + Facturacion + Presupuestos</span></div>
     </div>
@@ -392,11 +578,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">20-30</div>
+        <div class="hours">22</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill future" style="width:11%"></div></div>
+        <div class="bar-container"><div class="bar-fill future" style="width:9%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0 + Obras</span></div>
     </div>
@@ -425,11 +611,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">15-25</div>
+        <div class="hours">14</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill future" style="width:9%"></div></div>
+        <div class="bar-container"><div class="bar-fill future" style="width:6%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0 + Obras</span></div>
     </div>
@@ -458,11 +644,11 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">25-35</div>
+        <div class="hours">22</div>
         <div class="label">horas</div>
       </div>
       <div>
-        <div class="bar-container"><div class="bar-fill future" style="width:13%"></div></div>
+        <div class="bar-container"><div class="bar-fill future" style="width:9%"></div></div>
       </div>
       <div class="module-deps">Dependencias: <span>Capa 0 + Obras + Operarios</span></div>
     </div>
@@ -493,7 +679,7 @@
     </div>
     <div class="module-footer">
       <div class="module-time">
-        <div class="hours">25-40</div>
+        <div class="hours">35</div>
         <div class="label">horas</div>
       </div>
       <div>
@@ -508,59 +694,63 @@
     <h2>Hoja de ruta sugerida</h2>
 
     <div class="timeline-header">
-      <span>0-35h</span>
-      <span>35-85h</span>
-      <span>85-145h</span>
-      <span>145-195h</span>
-      <span>195-285h</span>
+      <span>0-28h</span>
+      <span>28-100h</span>
+      <span>100-157h</span>
+      <span>157-192h</span>
+      <span>192-250h</span>
     </div>
 
     <div class="roadmap-track">
-      <div class="roadmap-label">Capa 0 (25-35h)</div>
-      <div class="roadmap-bar base" style="width:16%;">25-35h</div>
+      <div class="roadmap-label" style="color:#34d399;">FactuBat (28h) &#10003;</div>
+      <div class="roadmap-bar" style="width:11%; background:#34d399;">28h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Facturacion (35-50h)</div>
-      <div class="roadmap-spacer" style="width:12%;"></div>
-      <div class="roadmap-bar core" style="width:22%;">35-50h</div>
+      <div class="roadmap-label">Capa 0 (18h)</div>
+      <div class="roadmap-bar base" style="width:7%;">18h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Presupuestos (15-25h)</div>
-      <div class="roadmap-spacer" style="width:12%;"></div>
-      <div class="roadmap-bar core" style="width:12%;">15-25h</div>
+      <div class="roadmap-label">Facturacion (38h)</div>
+      <div class="roadmap-spacer" style="width:11%;"></div>
+      <div class="roadmap-bar core" style="width:15%;">38h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Dashboards (25-35h)</div>
-      <div class="roadmap-spacer" style="width:30%;"></div>
-      <div class="roadmap-bar core" style="width:16%;">25-35h</div>
+      <div class="roadmap-label">Presupuestos (16h)</div>
+      <div class="roadmap-spacer" style="width:11%;"></div>
+      <div class="roadmap-bar core" style="width:6%;">16h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Obras (35-50h)</div>
-      <div class="roadmap-spacer" style="width:30%;"></div>
-      <div class="roadmap-bar core" style="width:22%;">35-50h</div>
+      <div class="roadmap-label">Dashboards (22h)</div>
+      <div class="roadmap-spacer" style="width:32%;"></div>
+      <div class="roadmap-bar core" style="width:9%;">22h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Operarios (20-30h)</div>
-      <div class="roadmap-spacer" style="width:60%;"></div>
-      <div class="roadmap-bar future" style="width:14%;">20-30h</div>
+      <div class="roadmap-label">Obras (35h)</div>
+      <div class="roadmap-spacer" style="width:32%;"></div>
+      <div class="roadmap-bar core" style="width:14%;">35h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Vehiculos (15-25h)</div>
-      <div class="roadmap-spacer" style="width:60%;"></div>
-      <div class="roadmap-bar future" style="width:12%;">15-25h</div>
+      <div class="roadmap-label">Operarios (22h)</div>
+      <div class="roadmap-spacer" style="width:55%;"></div>
+      <div class="roadmap-bar future" style="width:9%;">22h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Amianto (25-35h)</div>
-      <div class="roadmap-spacer" style="width:74%;"></div>
-      <div class="roadmap-bar future" style="width:16%;">25-35h</div>
+      <div class="roadmap-label">Vehiculos (14h)</div>
+      <div class="roadmap-spacer" style="width:55%;"></div>
+      <div class="roadmap-bar future" style="width:6%;">14h</div>
     </div>
     <div class="roadmap-track">
-      <div class="roadmap-label">Migracion (25-40h)</div>
-      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+      <div class="roadmap-label">Amianto (22h)</div>
+      <div class="roadmap-spacer" style="width:70%;"></div>
+      <div class="roadmap-bar future" style="width:9%;">22h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Migracion (35h)</div>
+      <div class="roadmap-bar base" style="width:8%; opacity:0.5;">&#9679;</div>
       <div class="roadmap-spacer" style="width:2%;"></div>
-      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+      <div class="roadmap-bar base" style="width:8%; opacity:0.5;">&#9679;</div>
       <div class="roadmap-spacer" style="width:2%;"></div>
-      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+      <div class="roadmap-bar base" style="width:8%; opacity:0.5;">&#9679;</div>
     </div>
     <div style="padding-left:200px; font-size:0.68rem; color:#64748b; margin-top:-4px; margin-bottom:12px;">
       &uarr; Se ejecuta por fases: migra los datos de cada m&oacute;dulo cuando se entrega
@@ -568,12 +758,12 @@
 
     <div style="text-align:center; margin-top:1.5rem;">
       <div style="display:inline-flex; gap:2rem; font-size:0.8rem; color:var(--muted);">
-        <div><strong style="color:var(--primary);">Fase 1</strong> &mdash; 75-110h &middot; Base + Facturacion + Presupuestos</div>
-        <div><strong style="color:var(--accent);">Fase 2</strong> &mdash; 60-85h &middot; Dashboards + Obras</div>
-        <div><strong style="color:var(--warning);">Fase 3</strong> &mdash; 60-90h &middot; Ampliaciones</div>
+        <div><strong style="color:var(--primary);">Fase 1</strong> &mdash; 100h &middot; FactuBat + Base + Facturacion + Presupuestos</div>
+        <div><strong style="color:var(--accent);">Fase 2</strong> &mdash; 57h &middot; Dashboards + Obras</div>
+        <div><strong style="color:var(--warning);">Fase 3</strong> &mdash; 58h &middot; Ampliaciones</div>
       </div>
       <div style="margin-top:8px; font-size:0.75rem; color:#64748b;">
-        + 25-40h de migraci&oacute;n (transversal a todas las fases)
+        + 35h de migraci&oacute;n (transversal a todas las fases)
       </div>
     </div>
   </div>
@@ -583,7 +773,8 @@
     <h3>Notas importantes</h3>
     <ul>
       <li>La <strong>Capa 0</strong> va incluida en cualquier modulo que se contrate. No tiene coste separado.</li>
-      <li>Las horas son de <strong>desarrollo efectivo</strong>. No incluyen reuniones de requisitos, formacion ni soporte post-entrega.</li>
+      <li>Las horas son de <strong>desarrollo efectivo</strong>. No representan plazos de entrega ni calendario &mdash; el ritmo de entrega depende de la disponibilidad y la coordinacion con el cliente.</li>
+      <li>No incluyen reuniones de requisitos, formacion ni soporte post-entrega.</li>
       <li>Los modulos de <strong>Fase 2</strong> (Dashboards y Obras) pueden desarrollarse en paralelo con solapamiento.</li>
       <li>Los modulos de <strong>Ampliacion</strong> son independientes entre si y pueden contratarse en cualquier orden.</li>
       <li>Cada modulo se entrega con <strong>datos migrados</strong> desde las carpetas existentes cuando sea aplicable.</li>
