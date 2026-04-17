@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutal ERP - Comparativa de mercado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --primary: #3b82f6;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 2rem; line-height: 1.6; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header { text-align: center; margin-bottom: 3rem; }
+    .header h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .header h1 span { color: var(--primary); }
+    .header .subtitle { color: var(--muted); font-size: 0.95rem; }
+    .header .date { color: var(--muted); font-size: 0.8rem; margin-top: 0.5rem; }
+
+    .section { margin-bottom: 2.5rem; }
+    .section h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .section p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    th { text-align: left; padding: 10px 14px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); border-bottom: 2px solid var(--border); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 0.88rem; }
+    th:not(:first-child), td:not(:first-child) { text-align: right; }
+    tr.highlight td { background: rgba(16,185,129,0.06); font-weight: 600; }
+    tr.highlight td:first-child { color: var(--accent); }
+    tr.total td { border-top: 2px solid var(--border); font-weight: 800; font-size: 1rem; }
+
+    .badge { padding: 3px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+    .badge-green { background: rgba(16,185,129,0.15); color: #34d399; }
+    .badge-yellow { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .badge-red { background: rgba(239,68,68,0.15); color: #f87171; }
+
+    .savings { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-align: center; margin: 2rem 0; }
+    .savings .big { font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+    .savings .label { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+    .bar-compare { margin: 1.5rem 0; }
+    .bar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .bar-label { width: 160px; font-size: 0.82rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 28px; background: rgba(255,255,255,0.03); border-radius: 6px; position: relative; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 12px; font-size: 0.78rem; font-weight: 700; color: white; }
+    .bar-fill.consultora { background: #ef4444; }
+    .bar-fill.freelance { background: var(--warning); }
+    .bar-fill.nosotros { background: var(--accent); }
+
+    .callout { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); border-left: 4px solid var(--accent); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .callout p { color: var(--text); margin: 0; }
+    .callout strong { color: var(--accent); }
+
+    .note { font-size: 0.8rem; color: #64748b; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .note p { font-size: 0.8rem; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1><span>Solutal</span> ERP</h1>
+    <div class="subtitle">Comparativa de mercado y justificacion de horas</div>
+    <div class="date">Abril 2026</div>
+  </div>
+
+  <!-- CONTEXTO -->
+  <div class="section">
+    <h2>Que se esta presupuestando</h2>
+    <p>
+      Un sistema de gestion integral a medida para un grupo de 6 empresas: facturacion bidireccional
+      con extraccion automatica por IA, gestion de presupuestos, obras con imputacion de gastos,
+      dashboards de visibilidad financiera a 4 niveles (grupo, empresa, obras, obra individual),
+      gestion de operarios, vehiculos, desamiantado regulatorio y migracion de datos existentes.
+    </p>
+    <p>
+      No es un software estandar: esta dise&ntilde;ado para la operativa real de Solutal,
+      con sus empresas, sus obras, sus flujos de trabajo y su estructura de carpetas.
+    </p>
+  </div>
+
+  <!-- COMPARATIVA DE MERCADO -->
+  <div class="section">
+    <h2>Comparativa con el mercado</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Proveedor</th>
+          <th>Horas</th>
+          <th>Tarifa/h</th>
+          <th>Total</th>
+          <th>Ahorro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Consultora mediana <span class="badge badge-red">x3.2</span></td>
+          <td>600-800h</td>
+          <td>55-75 &euro;</td>
+          <td>33.000-60.000 &euro;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Consultora peque&ntilde;a <span class="badge badge-yellow">x2</span></td>
+          <td>400-500h</td>
+          <td>45-55 &euro;</td>
+          <td>18.000-27.500 &euro;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Freelance senior <span class="badge badge-yellow">x1.5</span></td>
+          <td>300-400h</td>
+          <td>40-50 &euro;</td>
+          <td>12.000-20.000 &euro;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr class="highlight">
+          <td>Nuestra propuesta <span class="badge badge-green">x1</span></td>
+          <td>389h</td>
+          <td>36 &euro;</td>
+          <td>14.000 &euro;</td>
+          <td><span class="badge badge-green">-53% a -77%</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="bar-compare">
+      <div class="bar-row">
+        <div class="bar-label">Consultora mediana</div>
+        <div class="bar-track">
+          <div class="bar-fill consultora" style="width:100%;">33.000-60.000 &euro;</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Consultora peque&ntilde;a</div>
+        <div class="bar-track">
+          <div class="bar-fill freelance" style="width:48%;">18.000-27.500 &euro;</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Freelance senior</div>
+        <div class="bar-track">
+          <div class="bar-fill freelance" style="width:27%;">12.000-20.000 &euro;</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="color:var(--accent); font-weight:700;">Nuestra propuesta</div>
+        <div class="bar-track">
+          <div class="bar-fill nosotros" style="width:23%;">14.000 &euro;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AHORRO -->
+  <div class="savings">
+    <div class="big">-53% a -77%</div>
+    <div class="label">respecto al mercado para un proyecto de esta envergadura</div>
+  </div>
+
+  <!-- DESGLOSE POR MODULO -->
+  <div class="section">
+    <h2>Desglose: horas de mercado vs horas presupuestadas</h2>
+    <p>
+      La columna &laquo;Mercado&raquo; refleja las horas que presupuestar&iacute;a un freelance senior
+      o consultora peque&ntilde;a para el mismo alcance funcional.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Modulo</th>
+          <th>Mercado</th>
+          <th>Presupuestado</th>
+          <th>Reduccion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FactuBat (completado)</td>
+          <td>80-120h</td>
+          <td>44h</td>
+          <td><span class="badge badge-green">-56%</span></td>
+        </tr>
+        <tr>
+          <td>Capa 0 &mdash; Base</td>
+          <td>60-80h</td>
+          <td>28h</td>
+          <td><span class="badge badge-green">-60%</span></td>
+        </tr>
+        <tr>
+          <td>Facturacion completa</td>
+          <td>100-140h</td>
+          <td>59h</td>
+          <td><span class="badge badge-green">-51%</span></td>
+        </tr>
+        <tr>
+          <td>Presupuestos</td>
+          <td>40-60h</td>
+          <td>25h</td>
+          <td><span class="badge badge-green">-50%</span></td>
+        </tr>
+        <tr>
+          <td>Dashboards</td>
+          <td>60-80h</td>
+          <td>34h</td>
+          <td><span class="badge badge-green">-51%</span></td>
+        </tr>
+        <tr>
+          <td>Gestion de obras</td>
+          <td>100-140h</td>
+          <td>55h</td>
+          <td><span class="badge badge-green">-54%</span></td>
+        </tr>
+        <tr>
+          <td>Operarios</td>
+          <td>60-80h</td>
+          <td>34h</td>
+          <td><span class="badge badge-green">-51%</span></td>
+        </tr>
+        <tr>
+          <td>Vehiculos</td>
+          <td>40-60h</td>
+          <td>22h</td>
+          <td><span class="badge badge-green">-56%</span></td>
+        </tr>
+        <tr>
+          <td>Desamiantado</td>
+          <td>60-80h</td>
+          <td>34h</td>
+          <td><span class="badge badge-green">-51%</span></td>
+        </tr>
+        <tr>
+          <td>Migracion datos</td>
+          <td>80-120h</td>
+          <td>54h</td>
+          <td><span class="badge badge-green">-46%</span></td>
+        </tr>
+        <tr class="total">
+          <td>Total</td>
+          <td>680-960h</td>
+          <td>389h</td>
+          <td><span class="badge badge-green">-52%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ARGUMENTO -->
+  <div class="callout">
+    <p>
+      Un proyecto de esta complejidad &mdash; 10 m&oacute;dulos, 6 empresas, extraccion por IA,
+      gestion documental, dashboards a 4 niveles &mdash; se presupuesta en el mercado entre
+      <strong>680 y 960 horas</strong> de desarrollo. Nuestra propuesta lo resuelve en
+      <strong>389 horas</strong>, un <strong>52% menos</strong>, gracias al uso de herramientas
+      de desarrollo asistido por IA que multiplican la productividad sin sacrificar calidad.
+    </p>
+  </div>
+
+  <div class="note">
+    <p>Las horas de mercado estan basadas en tarifas y tiempos habituales para desarrollo a medida en Espa&ntilde;a (2025-2026), consultando fuentes publicas de consultoras y plataformas de freelance.</p>
+    <p>Las horas presupuestadas son de desarrollo efectivo y no representan plazos de entrega.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
