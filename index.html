@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutal ERP - Grupo Empresarial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233b82f6'/><text x='16' y='22' font-family='sans-serif' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>S</text></svg>">
+</head>
+<body>
+
+<button class="mobile-toggle" id="mobileToggle">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app">
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <h1><span>S</span>olutal</h1>
+      <div class="subtitle">Grupo Empresarial</div>
+    </div>
+
+    <div class="company-selector">
+      <label>Empresa</label>
+      <select id="companySelect">
+        <option value="todas">Todas las empresas</option>
+        <option value="solutal">Solutal</option>
+        <option value="aplital">Aplital</option>
+        <option value="ccv">CCV - Confor Clim&aacute;tico</option>
+        <option value="imper">Imper Confort</option>
+        <option value="jardin">Jard&iacute;n 1900</option>
+      </select>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-screen="dashboard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </div>
+
+      <div class="nav-section-label">Finanzas</div>
+      <div class="nav-item" data-screen="bandeja">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3H10l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+        <span>Bandeja de entrada</span>
+        <span class="badge-count">3</span>
+      </div>
+      <div class="nav-item" data-screen="facturacion-recibidas">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Facturaci&oacute;n</span>
+      </div>
+      <div class="nav-item nav-sub-item" data-screen="facturacion-recibidas">
+        <span>Recibidas</span>
+      </div>
+      <div class="nav-item nav-sub-item" data-screen="facturacion-emitidas">
+        <span>Emitidas</span>
+      </div>
+
+      <div class="nav-section-label">Comercial</div>
+      <div class="nav-item" data-screen="presupuestos">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"/><path d="M9 15h3l8.5-8.5a2.121 2.121 0 00-3-3L9 12v3"/><line x1="16" y1="5" x2="19" y2="8"/></svg>
+        <span>Presupuestos</span>
+      </div>
+
+      <div class="nav-section-label">Operaciones</div>
+      <div class="nav-item" data-screen="obras-dashboard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/></svg>
+        <span>Obras</span>
+      </div>
+      <div class="nav-item nav-sub-item" data-screen="obras-dashboard">
+        <span>Dashboard Obras</span>
+      </div>
+      <div class="nav-item nav-sub-item" data-screen="obras-lista">
+        <span>Lista de Obras</span>
+      </div>
+
+      <div class="nav-item disabled" data-screen="operarios">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Operarios</span>
+        <span class="badge-soon">Pr&oacute;ximamente</span>
+      </div>
+
+      <div class="nav-item disabled" data-screen="vehiculos">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14v-5l-2-6H7L5 12v5z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+        <span>Veh&iacute;culos</span>
+        <span class="badge-soon">Pr&oacute;ximamente</span>
+      </div>
+
+      <div class="nav-item disabled" data-screen="amianto" id="navAmianto" style="display:none;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        <span>Amianto</span>
+        <span class="badge-soon">Pr&oacute;ximamente</span>
+      </div>
+
+      <div class="nav-section-label">Sistema</div>
+      <div class="nav-item disabled" data-screen="config">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configuraci&oacute;n</span>
+        <span class="badge-soon">Pr&oacute;ximamente</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">JR</div>
+      <div class="user-info">
+        <div class="name">Juan Ram&oacute;n P.</div>
+        <div class="role">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ========== SCREEN: DASHBOARD GRUPO ========== -->
+    <section class="screen active" id="screen-dashboard-grupo">
+      <div class="page-header">
+        <h2>Dashboard del Grupo</h2>
+        <p class="page-desc">Resumen consolidado de todas las empresas &mdash; Abril 2026</p>
+      </div>
+
+      <div class="cards-row">
+        <div class="card-stat">
+          <div class="card-label">Facturaci&oacute;n total mes</div>
+          <div class="card-value">&euro;127.450</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pendiente de cobro</div>
+          <div class="card-value warning">&euro;43.200</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Obras activas</div>
+          <div class="card-value primary">14</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Obras pend. facturar</div>
+          <div class="card-value warning">3</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Facturaci&oacute;n por empresa</h3>
+          <span style="font-size:0.75rem;color:#64748b;">Abril 2026</span>
+        </div>
+        <div class="panel-body">
+          <div class="bar-chart">
+            <div class="bar-item">
+              <span class="bar-label">Solutal</span>
+              <div class="bar-track"><div class="bar-fill solutal" style="width:100%"></div></div>
+              <span class="bar-value">&euro;52.300</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Aplital</span>
+              <div class="bar-track"><div class="bar-fill aplital" style="width:59.7%"></div></div>
+              <span class="bar-value">&euro;31.200</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">CCV</span>
+              <div class="bar-track"><div class="bar-fill ccv" style="width:54.3%"></div></div>
+              <span class="bar-value">&euro;28.400</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Imper Confort</span>
+              <div class="bar-track"><div class="bar-fill imper" style="width:16.7%"></div></div>
+              <span class="bar-value">&euro;8.750</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Jard&iacute;n 1900</span>
+              <div class="bar-track"><div class="bar-fill jardin" style="width:13%"></div></div>
+              <span class="bar-value">&euro;6.800</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Cobros pendientes m&aacute;s antiguos</h3>
+        </div>
+        <div class="panel-body table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Obra / Concepto</th>
+                <th>Importe</th>
+                <th>D&iacute;as pendiente</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="obra-link" data-obra="polideportivo">Obra Polideportivo El Jaje</span></td>
+                <td>&euro;12.400</td>
+                <td style="color:#f87171;font-weight:600;">87 d&iacute;as</td>
+                <td><span class="badge badge-blue">Facturada</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td>CEIP Fuensalida</td>
+                <td>&euro;8.200</td>
+                <td style="color:#fbbf24;font-weight:600;">62 d&iacute;as</td>
+                <td><span class="badge badge-blue">Facturada</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td>Mantenimiento Mercanza</td>
+                <td>&euro;4.100</td>
+                <td style="color:#fbbf24;font-weight:600;">45 d&iacute;as</td>
+                <td><span class="badge badge-blue">Facturada</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="obra-link" data-obra="castillo">Obra Castillo Bayuela</span></td>
+                <td>&euro;6.500</td>
+                <td style="font-weight:600;">38 d&iacute;as</td>
+                <td><span class="badge badge-blue">Facturada</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="obra-link" data-obra="mancomunidad">Mancomunidad Calera</span></td>
+                <td>&euro;12.000</td>
+                <td style="font-weight:600;">31 d&iacute;as</td>
+                <td><span class="badge badge-blue">Facturada</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: DASHBOARD EMPRESA ========== -->
+    <section class="screen" id="screen-dashboard-empresa">
+      <div class="page-header">
+        <h2>Dashboard &mdash; <span id="empresaDashTitle">Solutal</span></h2>
+        <p class="page-desc">Resumen de la empresa seleccionada &mdash; Abril 2026</p>
+      </div>
+
+      <div class="cards-row" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+        <div class="card-stat">
+          <div class="card-label">Facturaci&oacute;n mes</div>
+          <div class="card-value" id="empFacturacion">&euro;52.300</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pendiente cobro</div>
+          <div class="card-value warning" id="empPendiente">&euro;31.900</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Obras en proceso</div>
+          <div class="card-value primary" id="empObras">8</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pend. facturar</div>
+          <div class="card-value warning" id="empPendFacturar">2</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Operarios activos</div>
+          <div class="card-value" id="empOperarios">6</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Veh&iacute;culos asignados</div>
+          <div class="card-value" id="empVehiculos">4</div>
+        </div>
+      </div>
+
+      <div class="two-cols">
+        <div class="panel">
+          <div class="panel-header"><h3>&Uacute;ltimas facturas</h3></div>
+          <div class="panel-body table-wrapper">
+            <table class="mini-table">
+              <thead>
+                <tr><th>Fecha</th><th>N&ordm;</th><th>Cliente/Prov.</th><th>Importe</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>12/04/2026</td><td>F-2026-087</td><td>Ayto. Sevilleja</td><td>&euro;8.400</td><td><span class="badge badge-blue">Emitida</span></td></tr>
+                <tr><td>08/04/2026</td><td>F-2026-086</td><td>Dorseran S.L.</td><td>&euro;14.200</td><td><span class="badge badge-green">Cobrada</span></td></tr>
+                <tr><td>03/04/2026</td><td>R-2026-142</td><td>Saltoki</td><td>&euro;2.340</td><td><span class="badge badge-green">Pagada</span></td></tr>
+                <tr><td>01/04/2026</td><td>R-2026-139</td><td>Ebora Aluminio</td><td>&euro;5.800</td><td><span class="badge badge-yellow">Pendiente</span></td></tr>
+                <tr><td>28/03/2026</td><td>F-2026-082</td><td>Particular - L&oacute;pez</td><td>&euro;3.100</td><td><span class="badge badge-green">Cobrada</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h3>Obras activas</h3></div>
+          <div class="panel-body table-wrapper">
+            <table class="mini-table">
+              <thead>
+                <tr><th>Obra</th><th>Estado</th><th>Presupuesto</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="obra-link" data-obra="polideportivo">Polideportivo El Jaje</span></td><td><span class="badge badge-blue">En proceso</span></td><td>&euro;28.500</td></tr>
+                <tr><td><span class="obra-link" data-obra="dorseran">Dorseran Barajas</span></td><td><span class="badge badge-blue">En proceso</span></td><td>&euro;42.000</td></tr>
+                <tr><td><span class="obra-link" data-obra="terraza">Terraza Trinidad 19</span></td><td><span class="badge badge-blue">En proceso</span></td><td>&euro;6.800</td></tr>
+                <tr><td>Real de San Vicente</td><td><span class="badge badge-yellow">Pend. facturar</span></td><td>&euro;15.200</td></tr>
+                <tr><td><span class="obra-link" data-obra="castillo">Castillo Bayuela</span></td><td><span class="badge badge-purple">Pend. cobro</span></td><td>&euro;9.300</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: BANDEJA DE ENTRADA (FACTUBAT) ========== -->
+    <section class="screen" id="screen-bandeja">
+      <div class="page-header">
+        <h2>Bandeja de entrada</h2>
+        <button class="btn-primary">+ Subir documento</button>
+      </div>
+
+      <div class="cards-row" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="card-stat">
+          <div class="card-label">En cola</div>
+          <div class="card-value warning">2</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Procesando IA</div>
+          <div class="card-value primary">1</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Listos para validar</div>
+          <div class="card-value success">3</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Validados hoy</div>
+          <div class="card-value">7</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Errores</div>
+          <div class="card-value danger">1</div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Empresa</label>
+          <select><option>Todas</option><option>Solutal</option><option>Aplital</option><option>CCV</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Estado</label>
+          <select><option>Pendientes</option><option>Todos</option><option>Procesando</option><option>Listos</option><option>Validados</option><option>Error</option></select>
+        </div>
+      </div>
+
+      <div class="bandeja-grid">
+
+        <!-- Doc 0a: En cola -->
+        <div class="doc-card queued">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">Solutal_20260417_ferreteria_duran.pdf</div>
+            <div class="doc-card-time">Hace 30 seg</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot queued"></span>
+            <span style="color:#94a3b8;">En cola &mdash; esperando procesamiento</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Empresa</dt><dd>Solutal</dd>
+            <dt>Origen</dt><dd>Watcher autom&aacute;tico</dd>
+          </div>
+        </div>
+
+        <!-- Doc 0b: En cola -->
+        <div class="doc-card queued">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">CCV_20260417_escoda_ventilacion.jpg</div>
+            <div class="doc-card-time">Hace 45 seg</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot queued"></span>
+            <span style="color:#94a3b8;">En cola &mdash; esperando procesamiento</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Empresa</dt><dd>CCV</dd>
+            <dt>Origen</dt><dd>Subida manual</dd>
+          </div>
+        </div>
+
+        <!-- Doc 1: Procesando -->
+        <div class="doc-card processing">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">Solutal_20260417_factura_saltoki.pdf</div>
+            <div class="doc-card-time">Hace 2 min</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot processing"></span>
+            <span style="color:#f59e0b;">Procesando con IA...</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Empresa</dt><dd>Solutal</dd>
+            <dt>Origen</dt><dd>Watcher autom&aacute;tico</dd>
+          </div>
+        </div>
+
+        <!-- Doc 2: Listo para validar - datos completos -->
+        <div class="doc-card ready">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">Aplital_20260416_ebora_aluminio.pdf</div>
+            <div class="doc-card-time">Hace 14 min</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot ready"></span>
+            <span style="color:#10b981;">Listo para validar</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Proveedor</dt><dd class="llm-guess">Ebora Aluminio SL</dd>
+            <dt>CIF</dt><dd class="llm-guess">B45123456</dd>
+            <dt>N&ordm; Factura</dt><dd class="llm-guess">FA-2026/0847</dd>
+            <dt>Fecha</dt><dd class="llm-guess">14/04/2026</dd>
+            <dt>Base imp.</dt><dd class="llm-guess">&euro;1.240,00</dd>
+            <dt>IVA 21%</dt><dd class="llm-guess">&euro;260,40</dd>
+            <dt>Total</dt><dd class="llm-guess">&euro;1.500,40</dd>
+            <dt>Empresa</dt><dd>Aplital</dd>
+          </div>
+          <div class="doc-card-actions">
+            <button class="btn-validate">Validar</button>
+            <button class="btn-edit-data">Corregir datos</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+          <div class="doc-card-cost">Coste extracci&oacute;n: 847 tokens &middot; $0.003</div>
+        </div>
+
+        <!-- Doc 3: Listo para validar -->
+        <div class="doc-card ready">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">Solutal_20260416_danosa_material.pdf</div>
+            <div class="doc-card-time">Hace 22 min</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot ready"></span>
+            <span style="color:#10b981;">Listo para validar</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Proveedor</dt><dd class="llm-guess">Danosa SA</dd>
+            <dt>CIF</dt><dd class="llm-guess">A19034567</dd>
+            <dt>N&ordm; Factura</dt><dd class="llm-guess">V26-003421</dd>
+            <dt>Fecha</dt><dd class="llm-guess">12/04/2026</dd>
+            <dt>Base imp.</dt><dd class="llm-guess">&euro;3.680,00</dd>
+            <dt>IVA 21%</dt><dd class="llm-guess">&euro;772,80</dd>
+            <dt>Total</dt><dd class="llm-guess">&euro;4.452,80</dd>
+            <dt>Empresa</dt><dd>Solutal</dd>
+          </div>
+          <div class="doc-card-actions">
+            <button class="btn-validate">Validar</button>
+            <button class="btn-edit-data">Corregir datos</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+          <div class="doc-card-cost">Coste extracci&oacute;n: 1.102 tokens &middot; $0.004</div>
+        </div>
+
+        <!-- Doc 4: Listo para validar -->
+        <div class="doc-card ready">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">CCV_20260415_pecomark_repuestos.jpg</div>
+            <div class="doc-card-time">Hace 1h</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot ready"></span>
+            <span style="color:#10b981;">Listo para validar</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Proveedor</dt><dd class="llm-guess">Pecomark SA</dd>
+            <dt>CIF</dt><dd class="llm-guess">A28456789</dd>
+            <dt>N&ordm; Factura</dt><dd class="llm-guess">PCM-60234</dd>
+            <dt>Fecha</dt><dd class="llm-guess">15/04/2026</dd>
+            <dt>Base imp.</dt><dd class="llm-guess">&euro;890,00</dd>
+            <dt>IVA 21%</dt><dd class="llm-guess">&euro;186,90</dd>
+            <dt>Total</dt><dd class="llm-guess">&euro;1.076,90</dd>
+            <dt>Empresa</dt><dd>CCV</dd>
+          </div>
+          <div class="doc-card-actions">
+            <button class="btn-validate">Validar</button>
+            <button class="btn-edit-data">Corregir datos</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+          <div class="doc-card-cost">Coste extracci&oacute;n: 634 tokens &middot; $0.002</div>
+        </div>
+
+        <!-- Doc 5: Error -->
+        <div class="doc-card error">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">scan_20260415_borroso.jpg</div>
+            <div class="doc-card-time">Hace 3h</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot error"></span>
+            <span style="color:#ef4444;">Error de extracci&oacute;n</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Motivo</dt><dd style="color:#ef4444;">Imagen ilegible &mdash; resoluci&oacute;n insuficiente</dd>
+            <dt>Empresa</dt><dd>Solutal</dd>
+            <dt>Origen</dt><dd>Subida manual</dd>
+          </div>
+          <div class="doc-card-actions">
+            <button class="btn-edit-data">Reintentar</button>
+            <button class="btn-reject">Descartar</button>
+          </div>
+        </div>
+
+        <!-- Doc 6: Ya validado (atenuado) -->
+        <div class="doc-card validated">
+          <div class="doc-card-header">
+            <div class="doc-card-filename">Solutal_20260415_la_pintureria.pdf</div>
+            <div class="doc-card-time">Hace 4h</div>
+          </div>
+          <div class="doc-card-status">
+            <span class="status-dot validated"></span>
+            <span style="color:#3b82f6;">Validado</span>
+          </div>
+          <div class="doc-card-fields">
+            <dt>Proveedor</dt><dd>La Pinturer&iacute;a SL</dd>
+            <dt>N&ordm; Factura</dt><dd>LP-2026/312</dd>
+            <dt>Total</dt><dd>&euro;467,50</dd>
+            <dt>Validado por</dt><dd>Juan Ram&oacute;n P.</dd>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: DETALLE DOCUMENTO (FACTUBAT) ========== -->
+    <section class="screen" id="screen-doc-detalle">
+      <div class="page-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="btn-back" id="btnBackBandeja">&larr;</button>
+          <h2>Validaci&oacute;n de documento</h2>
+          <span class="badge badge-green" id="docDetalleStatus">Listo para validar</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-validate" style="padding:8px 20px;font-size:0.85rem;">Validar y archivar</button>
+          <button class="btn-reject" style="padding:8px 20px;font-size:0.85rem;">Rechazar</button>
+        </div>
+      </div>
+
+      <div class="doc-detail-layout">
+        <!-- IZQUIERDA: Visor del documento -->
+        <div class="doc-viewer">
+          <div class="doc-viewer-header">
+            <span class="doc-viewer-filename" id="docViewerFilename">Aplital_20260416_ebora_aluminio.pdf</span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-action">Zoom +</button>
+              <button class="btn-action">Zoom -</button>
+              <button class="btn-action">Descargar</button>
+            </div>
+          </div>
+          <div class="doc-viewer-content">
+            <div class="fake-pdf">
+              <div class="fake-pdf-header">
+                <div class="fake-pdf-logo">EBORA ALUMINIO SL</div>
+                <div class="fake-pdf-empresa-data">
+                  CIF: B45123456<br>
+                  Pol. Ind. Sta. Mar&iacute;a de Benquerencia<br>
+                  C/ Carpinteros, nave 12<br>
+                  45007 Toledo
+                </div>
+              </div>
+
+              <div class="fake-pdf-titulo">FACTURA</div>
+
+              <div class="fake-pdf-meta">
+                <div class="fake-pdf-meta-col">
+                  <strong>N&ordm; Factura:</strong> FA-2026/0847<br>
+                  <strong>Fecha:</strong> 14/04/2026<br>
+                  <strong>Vencimiento:</strong> 14/05/2026
+                </div>
+                <div class="fake-pdf-meta-col">
+                  <strong>Cliente:</strong><br>
+                  Aplital SL<br>
+                  CIF: B45987654<br>
+                  Av. de Portugal, s/n<br>
+                  45600 Talavera de la Reina
+                </div>
+              </div>
+
+              <table class="fake-pdf-table">
+                <thead>
+                  <tr>
+                    <th style="text-align:left;">Descripci&oacute;n</th>
+                    <th>Uds.</th>
+                    <th>Precio</th>
+                    <th>Importe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align:left;">Perfil aluminio lacado RAL 7016 &mdash; 6m</td>
+                    <td>24</td>
+                    <td>18,50 &euro;</td>
+                    <td>444,00 &euro;</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:left;">Torniller&iacute;a inox A2 M6x30 (caja 200)</td>
+                    <td>3</td>
+                    <td>42,00 &euro;</td>
+                    <td>126,00 &euro;</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:left;">Sellante Sikaflex 11FC gris (600ml)</td>
+                    <td>12</td>
+                    <td>8,50 &euro;</td>
+                    <td>102,00 &euro;</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:left;">Escuadra reforzada 90&ordm; aluminio</td>
+                    <td>48</td>
+                    <td>3,75 &euro;</td>
+                    <td>180,00 &euro;</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:left;">Transporte a obra</td>
+                    <td>1</td>
+                    <td>388,00 &euro;</td>
+                    <td>388,00 &euro;</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="fake-pdf-totals">
+                <div class="fake-pdf-total-row">
+                  <span>Base imponible</span>
+                  <span>1.240,00 &euro;</span>
+                </div>
+                <div class="fake-pdf-total-row">
+                  <span>IVA 21%</span>
+                  <span>260,40 &euro;</span>
+                </div>
+                <div class="fake-pdf-total-row total">
+                  <span>TOTAL</span>
+                  <span>1.500,40 &euro;</span>
+                </div>
+              </div>
+
+              <div class="fake-pdf-footer">
+                <div>Forma de pago: Transferencia bancaria</div>
+                <div>IBAN: ES12 0182 3456 7890 1234 5678</div>
+                <div style="margin-top:8px;font-size:0.7rem;color:#64748b;">Inscrita en el Reg. Mercantil de Toledo, Tomo 1234, Folio 56, Hoja TO-7890</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DERECHA: Datos extraídos -->
+        <div class="doc-extracted">
+          <h3>Datos extra&iacute;dos por IA</h3>
+          <div class="doc-extracted-info">
+            <span class="badge badge-yellow" style="font-size:0.7rem;">847 tokens &middot; $0.003 &middot; 1.2s</span>
+          </div>
+
+          <div class="doc-form">
+            <div class="form-section-title">Datos del proveedor</div>
+            <div class="form-group">
+              <label>Proveedor</label>
+              <input type="text" value="Ebora Aluminio SL" class="llm-field">
+            </div>
+            <div class="form-group">
+              <label>CIF / NIF</label>
+              <input type="text" value="B45123456" class="llm-field">
+            </div>
+
+            <div class="form-separator"></div>
+            <div class="form-section-title">Datos de la factura</div>
+            <div class="form-group">
+              <label>N&ordm; Factura</label>
+              <input type="text" value="FA-2026/0847" class="llm-field">
+            </div>
+            <div class="form-group">
+              <label>Fecha factura</label>
+              <input type="text" value="14/04/2026" class="llm-field">
+            </div>
+
+            <div class="form-separator"></div>
+            <div class="form-section-title">L&iacute;neas de producto</div>
+            <div class="lines-table">
+              <table>
+                <thead>
+                  <tr><th style="text-align:left;">Descripci&oacute;n</th><th>Uds.</th><th>P. Unit.</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                  <tr class="llm-row"><td style="text-align:left;">Perfil aluminio lacado RAL 7016 &mdash; 6m</td><td>24</td><td>18,50</td><td>444,00</td></tr>
+                  <tr class="llm-row"><td style="text-align:left;">Torniller&iacute;a inox A2 M6x30 (caja 200)</td><td>3</td><td>42,00</td><td>126,00</td></tr>
+                  <tr class="llm-row"><td style="text-align:left;">Sellante Sikaflex 11FC gris (600ml)</td><td>12</td><td>8,50</td><td>102,00</td></tr>
+                  <tr class="llm-row"><td style="text-align:left;">Escuadra reforzada 90&ordm; aluminio</td><td>48</td><td>3,75</td><td>180,00</td></tr>
+                  <tr class="llm-row"><td style="text-align:left;">Transporte a obra</td><td>1</td><td>388,00</td><td>388,00</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="form-separator"></div>
+            <div class="form-section-title">Desglose IVA</div>
+            <div class="lines-table">
+              <table>
+                <thead>
+                  <tr><th>Base imponible</th><th>Tipo IVA</th><th>Cuota IVA</th></tr>
+                </thead>
+                <tbody>
+                  <tr class="llm-row"><td>1.240,00 &euro;</td><td>21%</td><td>260,40 &euro;</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group">
+                <label>Base imponible</label>
+                <input type="text" value="1.240,00 &euro;" class="llm-field">
+              </div>
+              <div class="form-group">
+                <label>Total factura</label>
+                <input type="text" value="1.500,40 &euro;" class="llm-field total-field">
+              </div>
+            </div>
+
+            <div class="form-separator"></div>
+            <div class="form-section-title">Refs. albaranes detectados</div>
+            <div class="delivery-notes">
+              <span class="delivery-note-tag">ALB-2026/1204</span>
+              <span class="delivery-note-tag">ALB-2026/1198</span>
+            </div>
+
+            <div class="form-separator"></div>
+            <div class="form-section-title">Asignaci&oacute;n (manual)</div>
+            <div class="form-group">
+              <label>Empresa del grupo</label>
+              <select class="manual-field">
+                <option>Aplital</option>
+                <option>Solutal</option>
+                <option>CCV</option>
+                <option>Imper Confort</option>
+                <option>Jard&iacute;n 1900</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Proyecto / Obra</label>
+              <select class="manual-field">
+                <option>Sin asignar</option>
+                <option>CEIP Fuensalida</option>
+                <option>Polideportivo El Jaje</option>
+                <option>Dorseran Barajas</option>
+                <option>Instituto San Isidro</option>
+                <option>Terraza Trinidad 19</option>
+                <option>Castillo Bayuela</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Cuenta contable</label>
+              <input type="text" value="" placeholder="Ej: 6210001" class="manual-field">
+            </div>
+            <div class="form-group">
+              <label>Notas</label>
+              <textarea class="manual-field" rows="2" placeholder="Observaciones..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: FACTURACION RECIBIDAS ========== -->
+    <section class="screen" id="screen-facturacion-recibidas">
+      <div class="page-header">
+        <h2>Facturaci&oacute;n</h2>
+        <p class="page-desc">Gesti&oacute;n de facturas recibidas y emitidas</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="recibidas">Recibidas</button>
+        <button class="tab-btn" data-tab="emitidas">Emitidas</button>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Empresa</label>
+          <select><option>Todas</option><option>Solutal</option><option>Aplital</option><option>CCV</option><option>Imper Confort</option><option>Jard&iacute;n 1900</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Desde</label>
+          <input type="date" value="2026-04-01">
+        </div>
+        <div class="filter-group">
+          <label>Hasta</label>
+          <input type="date" value="2026-04-17">
+        </div>
+        <div class="filter-group">
+          <label>Estado</label>
+          <select><option>Todos</option><option>Pendiente</option><option>Validada</option><option>Pagada</option><option>Rechazada</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Proveedor</label>
+          <input type="text" placeholder="Buscar proveedor...">
+        </div>
+        <button class="btn-filter">Filtrar</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>N&ordm; Factura</th>
+                <th>Proveedor</th>
+                <th>Empresa</th>
+                <th>Importe</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>15/04/2026</td>
+                <td>R-2026-158</td>
+                <td>Ebora Aluminio S.L.</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;4.350</td>
+                <td><span class="badge badge-yellow">Pendiente</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>14/04/2026</td>
+                <td>R-2026-157</td>
+                <td>La Pintur&iacute;a S.L.</td>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td>&euro;1.280</td>
+                <td><span class="badge badge-green">Validada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>12/04/2026</td>
+                <td>R-2026-155</td>
+                <td>Saltoki Distribuci&oacute;n</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;2.890</td>
+                <td><span class="badge badge-green">Pagada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>10/04/2026</td>
+                <td>R-2026-153</td>
+                <td>Pecomark S.A.</td>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td>&euro;6.720</td>
+                <td><span class="badge badge-yellow">Pendiente</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>08/04/2026</td>
+                <td>R-2026-150</td>
+                <td>Danosa Impermeabilizaci&oacute;n</td>
+                <td><span class="badge badge-empresa badge-imper">Imper</span></td>
+                <td>&euro;3.450</td>
+                <td><span class="badge badge-green">Pagada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>05/04/2026</td>
+                <td>R-2026-148</td>
+                <td>Ferreter&iacute;a Industrial Toledo</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;890</td>
+                <td><span class="badge badge-green">Pagada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>03/04/2026</td>
+                <td>R-2026-146</td>
+                <td>Aluminios del Tajo</td>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td>&euro;7.200</td>
+                <td><span class="badge badge-green">Validada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>02/04/2026</td>
+                <td>R-2026-144</td>
+                <td>Grupo Electr&oacute;geno Castilla</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;1.560</td>
+                <td><span class="badge badge-red">Rechazada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>01/04/2026</td>
+                <td>R-2026-142</td>
+                <td>Transportes Mancha S.L.</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;980</td>
+                <td><span class="badge badge-green">Pagada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>28/03/2026</td>
+                <td>R-2026-139</td>
+                <td>Prefabricados Hontanares</td>
+                <td><span class="badge badge-empresa badge-jardin">Jard&iacute;n</span></td>
+                <td>&euro;2.150</td>
+                <td><span class="badge badge-yellow">Pendiente</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: FACTURACION EMITIDAS ========== -->
+    <section class="screen" id="screen-facturacion-emitidas">
+      <div class="page-header">
+        <h2>Facturaci&oacute;n</h2>
+        <p class="page-desc">Gesti&oacute;n de facturas recibidas y emitidas</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn" data-tab="recibidas">Recibidas</button>
+        <button class="tab-btn active" data-tab="emitidas">Emitidas</button>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Empresa</label>
+          <select><option>Todas</option><option>Solutal</option><option>Aplital</option><option>CCV</option><option>Imper Confort</option><option>Jard&iacute;n 1900</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Desde</label>
+          <input type="date" value="2026-04-01">
+        </div>
+        <div class="filter-group">
+          <label>Hasta</label>
+          <input type="date" value="2026-04-17">
+        </div>
+        <div class="filter-group">
+          <label>Estado cobro</label>
+          <select><option>Todos</option><option>Emitida</option><option>Enviada</option><option>Cobrada</option><option>Cobro parcial</option><option>Pendiente firma</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Cliente</label>
+          <input type="text" placeholder="Buscar cliente...">
+        </div>
+        <button class="btn-filter">Filtrar</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>N&ordm; Factura</th>
+                <th>Cliente</th>
+                <th>Tipo cliente</th>
+                <th>Empresa</th>
+                <th>Importe</th>
+                <th>Estado cobro</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>15/04/2026</td>
+                <td>F-2026-091</td>
+                <td>Ayuntamiento de Sevilleja</td>
+                <td><span class="badge badge-cyan">P&uacute;blica</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;12.400</td>
+                <td><span class="badge badge-yellow">Pendiente firma</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>12/04/2026</td>
+                <td>F-2026-090</td>
+                <td>Dorseran S.L.</td>
+                <td><span class="badge badge-blue">Empresa</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;14.200</td>
+                <td><span class="badge badge-green">Cobrada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>10/04/2026</td>
+                <td>F-2026-089</td>
+                <td>Comunidad Prop. Trinidad 19</td>
+                <td><span class="badge badge-gray">Comunidad</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;3.400</td>
+                <td><span class="badge badge-orange">Cobro parcial</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>08/04/2026</td>
+                <td>F-2026-088</td>
+                <td>Mancomunidad Calera y Chozas</td>
+                <td><span class="badge badge-cyan">P&uacute;blica</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;12.000</td>
+                <td><span class="badge badge-blue">Emitida</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>05/04/2026</td>
+                <td>F-2026-087</td>
+                <td>Garc&iacute;a L&oacute;pez, Mar&iacute;a</td>
+                <td><span class="badge badge-gray">Particular</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;3.100</td>
+                <td><span class="badge badge-green">Cobrada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>03/04/2026</td>
+                <td>FA-2026-034</td>
+                <td>CEIP Fuensalida</td>
+                <td><span class="badge badge-cyan">P&uacute;blica</span></td>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td>&euro;8.200</td>
+                <td><span class="badge badge-blue">Enviada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>02/04/2026</td>
+                <td>FC-2026-018</td>
+                <td>Mercanza S.A.</td>
+                <td><span class="badge badge-blue">Empresa</span></td>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td>&euro;4.100</td>
+                <td><span class="badge badge-blue">Emitida</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>01/04/2026</td>
+                <td>FI-2026-011</td>
+                <td>Rodr&iacute;guez Fern&aacute;ndez, Antonio</td>
+                <td><span class="badge badge-gray">Particular</span></td>
+                <td><span class="badge badge-empresa badge-imper">Imper</span></td>
+                <td>&euro;2.850</td>
+                <td><span class="badge badge-green">Cobrada</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>28/03/2026</td>
+                <td>FJ-2026-008</td>
+                <td>Ayuntamiento de Talavera</td>
+                <td><span class="badge badge-cyan">P&uacute;blica</span></td>
+                <td><span class="badge badge-empresa badge-jardin">Jard&iacute;n</span></td>
+                <td>&euro;6.800</td>
+                <td><span class="badge badge-yellow">Pendiente firma</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+              <tr>
+                <td>25/03/2026</td>
+                <td>F-2026-084</td>
+                <td>ADIF - Alta Velocidad</td>
+                <td><span class="badge badge-cyan">P&uacute;blica</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td>&euro;18.500</td>
+                <td><span class="badge badge-orange">Cobro parcial</span></td>
+                <td><button class="btn-action">Ver</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: PRESUPUESTOS ========== -->
+    <section class="screen" id="screen-presupuestos">
+      <div class="page-header">
+        <h2>Presupuestos</h2>
+        <button class="btn-primary">+ Nuevo presupuesto</button>
+      </div>
+
+      <div class="cards-row" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="card-stat">
+          <div class="card-label">Total este a&ntilde;o</div>
+          <div class="card-value primary">24</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pend. respuesta</div>
+          <div class="card-value warning">5</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Aceptados</div>
+          <div class="card-value success">14</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Rechazados</div>
+          <div class="card-value danger">3</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Tasa conversi&oacute;n</div>
+          <div class="card-value success">58%</div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Empresa</label>
+          <select><option>Todas las empresas</option><option>Solutal</option><option>Aplital</option><option>CCV</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Estado</label>
+          <select><option>Todos los estados</option><option>Borrador</option><option>Enviado</option><option>Aceptado</option><option>Rechazado</option><option>Convertido en obra</option></select>
+        </div>
+        <div class="filter-group">
+          <label>A&ntilde;o</label>
+          <select><option>2026</option><option>2025</option><option>2024</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Buscar</label>
+          <input type="text" placeholder="Cliente u obra...">
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>N&ordm;</th>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Concepto</th>
+              <th>Empresa</th>
+              <th>Importe</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P-2026-024</td>
+              <td>12/04/2026</td>
+              <td>Mohamed</td>
+              <td>Reforma integral vivienda Fuenlabrada</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;18.200</td>
+              <td><span class="badge badge-yellow">Enviado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-023</td>
+              <td>08/04/2026</td>
+              <td>Ayto. Castillo de Bayuela</td>
+              <td>Desamiantado cubierta centro cultural</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;14.600</td>
+              <td><span class="badge badge-yellow">Enviado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-022</td>
+              <td>02/04/2026</td>
+              <td>Calle Progreso 58, Belvis</td>
+              <td>Reforma fachada y cubierta</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;9.400</td>
+              <td><span class="badge badge-yellow">Enviado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-021</td>
+              <td>28/03/2026</td>
+              <td>Eduardo</td>
+              <td>Cubierta nave industrial Fuenlabrada</td>
+              <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+              <td>&euro;22.800</td>
+              <td><span class="badge badge-yellow">Enviado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-020</td>
+              <td>25/03/2026</td>
+              <td>Ronda de Ca&ntilde;illo</td>
+              <td>Sustituci&oacute;n tuber&iacute;as</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;6.100</td>
+              <td><span class="badge badge-yellow">Enviado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-019</td>
+              <td>18/03/2026</td>
+              <td>Elisa Isabel Paniagua</td>
+              <td>Desamiantado vivienda Gamonal</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;4.800</td>
+              <td><span class="badge badge-green">Aceptado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-018</td>
+              <td>12/03/2026</td>
+              <td>Los Prados de Castillo Bayuela</td>
+              <td>Cubierta y cerrajer&iacute;a</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;31.500</td>
+              <td><span class="badge badge-green">Aceptado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-017</td>
+              <td>05/03/2026</td>
+              <td>Obra Progreso</td>
+              <td>Desamiantado y nueva cubierta</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;8.900</td>
+              <td><span class="badge badge-green">Aceptado &rarr; Obra</span></td>
+              <td><button class="btn-action">Ver obra</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-016</td>
+              <td>26/02/2026</td>
+              <td>Obra Valtorre</td>
+              <td>Desamiantado cubierta</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;5.200</td>
+              <td><span class="badge badge-green">Aceptado &rarr; Obra</span></td>
+              <td><button class="btn-action">Ver obra</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-015</td>
+              <td>20/02/2026</td>
+              <td>Manuel Casares</td>
+              <td>Impermeabilizaci&oacute;n cubierta</td>
+              <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+              <td>&euro;7.300</td>
+              <td><span class="badge badge-red">Rechazado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-014</td>
+              <td>15/02/2026</td>
+              <td>Megafactory</td>
+              <td>Mantenimiento climatizaci&oacute;n 2026</td>
+              <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+              <td>&euro;12.400</td>
+              <td><span class="badge badge-green">Aceptado &rarr; Obra</span></td>
+              <td><button class="btn-action">Ver obra</button></td>
+            </tr>
+            <tr>
+              <td>P-2026-013</td>
+              <td>08/02/2026</td>
+              <td>Artectum</td>
+              <td>Desamiantado Plaza Espa&ntilde;a</td>
+              <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+              <td>&euro;19.700</td>
+              <td><span class="badge badge-muted">Anulado</span></td>
+              <td><button class="btn-action">Ver</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: OBRAS DASHBOARD ========== -->
+    <section class="screen" id="screen-obras-dashboard">
+      <div class="page-header">
+        <h2>Dashboard de Obras</h2>
+        <p class="page-desc">Visi&oacute;n r&aacute;pida del estado de todas las obras</p>
+      </div>
+
+      <div class="cards-row">
+        <div class="card-stat">
+          <div class="card-label">En proceso</div>
+          <div class="card-value primary">8</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Finalizadas (mes)</div>
+          <div class="card-value success">3</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pend. facturar</div>
+          <div class="card-value warning">2</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Pend. cobro</div>
+          <div class="card-value warning">4</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><h3>Pipeline de obras</h3></div>
+        <div class="panel-body">
+          <div class="kanban">
+            <!-- Presupuesto -->
+            <div class="kanban-col presupuesto">
+              <div class="kanban-col-header">Presupuesto <span class="count">2</span></div>
+              <div class="kanban-cards">
+                <div class="kanban-card">
+                  <div class="kc-name">Calle Progreso 58</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;18.000</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>12 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name">Mohamed - Fuenlabrada</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-imper">Imper</span>
+                    <span class="kc-amount">&euro;5.400</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>5 d&iacute;as</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- En proceso -->
+            <div class="kanban-col en-proceso">
+              <div class="kanban-col-header">En proceso <span class="count">4</span></div>
+              <div class="kanban-cards">
+                <div class="kanban-card" data-obra="polideportivo">
+                  <div class="kc-name obra-link" data-obra="polideportivo">Polideportivo El Jaje</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;28.500</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>92 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name obra-link" data-obra="dorseran">Dorseran Barajas</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;42.000</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>45 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name obra-link" data-obra="terraza">Terraza Trinidad 19</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;6.800</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>28 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name">Instituto San Isidro</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-aplital">Aplital</span>
+                    <span class="kc-amount">&euro;22.600</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>18 d&iacute;as</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Pend facturar -->
+            <div class="kanban-col pend-facturar">
+              <div class="kanban-col-header">Pend. facturar <span class="count">2</span></div>
+              <div class="kanban-cards">
+                <div class="kanban-card">
+                  <div class="kc-name">Real de San Vicente</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;15.200</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>8 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name">Residencia Mayores</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-ccv">CCV</span>
+                    <span class="kc-amount">&euro;9.800</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>14 d&iacute;as</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Facturada pend cobro -->
+            <div class="kanban-col facturada">
+              <div class="kanban-col-header">Fact. pend. cobro <span class="count">3</span></div>
+              <div class="kanban-cards">
+                <div class="kanban-card">
+                  <div class="kc-name obra-link" data-obra="mancomunidad">Mancomunidad Calera</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;12.000</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>31 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name obra-link" data-obra="castillo">Castillo Bayuela</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;6.500</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>38 d&iacute;as</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name">ADIF Renfe</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;18.500</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>23 d&iacute;as</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Finalizada -->
+            <div class="kanban-col finalizada">
+              <div class="kanban-col-header">Finalizada <span class="count">2</span></div>
+              <div class="kanban-cards">
+                <div class="kanban-card">
+                  <div class="kc-name">Obra MOD</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-ccv">CCV</span>
+                    <span class="kc-amount">&euro;4.300</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>Completada</span></div>
+                </div>
+                <div class="kanban-card">
+                  <div class="kc-name">Santa Olalla</div>
+                  <div class="kc-meta">
+                    <span class="badge badge-empresa badge-solutal">Solutal</span>
+                    <span class="kc-amount">&euro;11.200</span>
+                  </div>
+                  <div class="kc-meta" style="margin-top:4px;"><span>Completada</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: OBRAS LISTA ========== -->
+    <section class="screen" id="screen-obras-lista">
+      <div class="page-header">
+        <h2>Lista de Obras</h2>
+        <p class="page-desc">Todas las obras del grupo con detalle financiero</p>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Empresa</label>
+          <select><option>Todas</option><option>Solutal</option><option>Aplital</option><option>CCV</option><option>Imper Confort</option><option>Jard&iacute;n 1900</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Estado</label>
+          <select><option>Todos</option><option>Presupuesto</option><option>En proceso</option><option>Pend. facturar</option><option>Pend. cobro</option><option>Finalizada</option></select>
+        </div>
+        <div class="filter-group">
+          <label>A&ntilde;o</label>
+          <select><option>2026</option><option>2025</option><option>2024</option></select>
+        </div>
+        <div class="filter-group">
+          <label>B&uacute;squeda</label>
+          <input type="text" placeholder="Buscar obra...">
+        </div>
+        <button class="btn-filter">Filtrar</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Obra</th>
+                <th>Empresa</th>
+                <th>Estado</th>
+                <th>Presupuesto</th>
+                <th>Facturado</th>
+                <th>Cobrado</th>
+                <th>% Cobro</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="obra-link" data-obra="polideportivo">Polideportivo El Jaje - Cubierta</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-blue">En proceso</span></td>
+                <td>&euro;28.500</td>
+                <td>&euro;12.400</td>
+                <td>&euro;0</td>
+                <td><span style="color:#ef4444;font-weight:600;">0%</span></td>
+                <td><button class="btn-action obra-link" data-obra="polideportivo">Detalle</button></td>
+              </tr>
+              <tr>
+                <td><span class="obra-link" data-obra="dorseran">Dorseran Barajas - Nave</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-blue">En proceso</span></td>
+                <td>&euro;42.000</td>
+                <td>&euro;14.200</td>
+                <td>&euro;14.200</td>
+                <td><span style="color:#10b981;font-weight:600;">100%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td><span class="obra-link" data-obra="terraza">Terraza Trinidad 19</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-blue">En proceso</span></td>
+                <td>&euro;6.800</td>
+                <td>&euro;3.400</td>
+                <td>&euro;1.700</td>
+                <td><span style="color:#f59e0b;font-weight:600;">50%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Real de San Vicente</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-yellow">Pend. facturar</span></td>
+                <td>&euro;15.200</td>
+                <td>&euro;0</td>
+                <td>&euro;0</td>
+                <td><span style="color:#64748b;">-</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td><span class="obra-link" data-obra="castillo">Castillo Bayuela</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-purple">Pend. cobro</span></td>
+                <td>&euro;9.300</td>
+                <td>&euro;6.500</td>
+                <td>&euro;0</td>
+                <td><span style="color:#ef4444;font-weight:600;">0%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td><span class="obra-link" data-obra="mancomunidad">Mancomunidad Calera</span></td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-purple">Pend. cobro</span></td>
+                <td>&euro;18.400</td>
+                <td>&euro;12.000</td>
+                <td>&euro;0</td>
+                <td><span style="color:#ef4444;font-weight:600;">0%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>CEIP Fuensalida</td>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td><span class="badge badge-purple">Pend. cobro</span></td>
+                <td>&euro;14.600</td>
+                <td>&euro;8.200</td>
+                <td>&euro;0</td>
+                <td><span style="color:#ef4444;font-weight:600;">0%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Instituto San Isidro</td>
+                <td><span class="badge badge-empresa badge-aplital">Aplital</span></td>
+                <td><span class="badge badge-blue">En proceso</span></td>
+                <td>&euro;22.600</td>
+                <td>&euro;0</td>
+                <td>&euro;0</td>
+                <td><span style="color:#64748b;">-</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Mantenimiento Mercanza</td>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td><span class="badge badge-purple">Pend. cobro</span></td>
+                <td>&euro;7.200</td>
+                <td>&euro;4.100</td>
+                <td>&euro;0</td>
+                <td><span style="color:#ef4444;font-weight:600;">0%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Residencia Mayores</td>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td><span class="badge badge-yellow">Pend. facturar</span></td>
+                <td>&euro;9.800</td>
+                <td>&euro;0</td>
+                <td>&euro;0</td>
+                <td><span style="color:#64748b;">-</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Obra MOD</td>
+                <td><span class="badge badge-empresa badge-ccv">CCV</span></td>
+                <td><span class="badge badge-green">Finalizada</span></td>
+                <td>&euro;4.300</td>
+                <td>&euro;4.300</td>
+                <td>&euro;4.300</td>
+                <td><span style="color:#10b981;font-weight:600;">100%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Santa Olalla</td>
+                <td><span class="badge badge-empresa badge-solutal">Solutal</span></td>
+                <td><span class="badge badge-green">Finalizada</span></td>
+                <td>&euro;11.200</td>
+                <td>&euro;11.200</td>
+                <td>&euro;11.200</td>
+                <td><span style="color:#10b981;font-weight:600;">100%</span></td>
+                <td><button class="btn-action">Detalle</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: OBRA INDIVIDUAL ========== -->
+    <section class="screen" id="screen-obra-individual">
+      <div class="page-header">
+        <div class="obra-header">
+          <h2>Obra Polideportivo El Jaje &mdash; Cubierta</h2>
+          <span class="badge badge-blue" style="font-size:0.8rem;padding:5px 14px;">En proceso</span>
+          <span class="badge badge-empresa badge-solutal" style="font-size:0.75rem;padding:4px 10px;">Solutal</span>
+        </div>
+        <div class="obra-sub-header">
+          <span>Cliente: <strong>Ayuntamiento local</strong></span>
+          <span>Tipo: <strong>Administraci&oacute;n p&uacute;blica</strong></span>
+          <span>Inicio: <strong>15/01/2026</strong></span>
+        </div>
+      </div>
+
+      <div class="cards-row" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+        <div class="card-stat">
+          <div class="card-label">Presupuesto</div>
+          <div class="card-value">&euro;28.500</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Costes (fact. recibidas)</div>
+          <div class="card-value">&euro;14.200</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Facturado al cliente</div>
+          <div class="card-value primary">&euro;12.400</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Cobrado</div>
+          <div class="card-value danger">&euro;0</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-label">Margen estimado</div>
+          <div class="card-value success">&euro;14.300 <span style="font-size:0.85rem;font-weight:500;">(50,2%)</span></div>
+        </div>
+      </div>
+
+      <div class="two-cols">
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="panel">
+            <div class="panel-header"><h3>Facturas recibidas (costes)</h3></div>
+            <div class="panel-body table-wrapper">
+              <table class="mini-table">
+                <thead>
+                  <tr><th>Fecha</th><th>Proveedor</th><th>Concepto</th><th>Importe</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>02/03/2026</td><td>Ebora Aluminio</td><td>Material cubierta</td><td>&euro;5.800</td></tr>
+                  <tr><td>15/03/2026</td><td>Construcciones Duque</td><td>Mano de obra subcontratada</td><td>&euro;4.200</td></tr>
+                  <tr><td>28/03/2026</td><td>Saltoki</td><td>Torniller&iacute;a y fijaciones</td><td>&euro;2.340</td></tr>
+                  <tr><td>10/04/2026</td><td>Transportes Mancha</td><td>Transporte materiales</td><td>&euro;1.860</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><h3>Facturas emitidas</h3></div>
+            <div class="panel-body table-wrapper">
+              <table class="mini-table">
+                <thead>
+                  <tr><th>Fecha</th><th>N&ordm;</th><th>Concepto</th><th>Importe</th><th>Estado</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>15/04/2026</td>
+                    <td>F-2026-091</td>
+                    <td>Certificaci&oacute;n parcial n&ordm;1</td>
+                    <td>&euro;12.400</td>
+                    <td><span class="badge badge-yellow">Pend. firma</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Albaranes sin factura</h3>
+              <span class="badge badge-yellow">2 pendientes</span>
+            </div>
+            <div class="panel-body">
+              <div class="warning-item">
+                &#9888; Albar&aacute;n #ALB-2026-034 &mdash; Saltoki &mdash; Material fontaner&iacute;a &mdash; &euro;680
+              </div>
+              <div class="warning-item">
+                &#9888; Albar&aacute;n #ALB-2026-041 &mdash; Ferreter&iacute;a Ind. Toledo &mdash; Herramientas &mdash; &euro;320
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="panel">
+            <div class="panel-header"><h3>Hitos y plazos</h3></div>
+            <div class="panel-body">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-icon done">&#10003;</div>
+                  <div class="timeline-content">
+                    <div class="tl-title">Presupuesto aceptado</div>
+                    <div class="tl-date">10/12/2025</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-icon done">&#10003;</div>
+                  <div class="timeline-content">
+                    <div class="tl-title">Inicio obra</div>
+                    <div class="tl-date">15/01/2026</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-icon in-progress">&#9719;</div>
+                  <div class="timeline-content">
+                    <div class="tl-title">Fin estimado</div>
+                    <div class="tl-date">30/04/2026</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-icon pending">&#9744;</div>
+                  <div class="timeline-content">
+                    <div class="tl-title" style="color:#94a3b8;">Facturaci&oacute;n final</div>
+                    <div class="tl-date">Pendiente</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-icon pending">&#9744;</div>
+                  <div class="timeline-content">
+                    <div class="tl-title" style="color:#94a3b8;">Cobro</div>
+                    <div class="tl-date">Pendiente</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><h3>Documentaci&oacute;n</h3></div>
+            <div class="panel-body">
+              <div class="checklist">
+                <div class="check-item">
+                  <div class="check-icon done">&#10003;</div>
+                  <span class="check-text">Licencia de obra</span>
+                </div>
+                <div class="check-item">
+                  <div class="check-icon done">&#10003;</div>
+                  <span class="check-text">Plan de seguridad</span>
+                </div>
+                <div class="check-item">
+                  <div class="check-icon pending">&#8212;</div>
+                  <span class="check-text muted">Certificado fin de obra (pendiente)</span>
+                </div>
+                <div class="check-item">
+                  <div class="check-icon pending">&#8212;</div>
+                  <span class="check-text muted">Documentaci&oacute;n final</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operarios asignados y Vehículos -->
+      <div class="obra-resources-row">
+
+        <!-- OPERARIOS -->
+        <div class="panel obra-resource-panel future-preview">
+          <div class="panel-header">
+            <h3>&#128119; Operarios asignados</h3>
+            <span class="badge-soon" style="font-size:0.65rem;">Pr&oacute;ximamente</span>
+          </div>
+          <div class="panel-body">
+            <div class="resource-summary">
+              <span class="res-total">4 operarios</span>
+              <span class="res-hours">127,5h este mes</span>
+            </div>
+            <table class="resource-table">
+              <thead>
+                <tr>
+                  <th style="text-align:left;">Operario</th>
+                  <th>Fecha</th>
+                  <th>Horas</th>
+                  <th>Tarea</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Jorge Cano D.</span></td>
+                  <td>16/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Montaje estructura</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Marcos Cieza F.</span></td>
+                  <td>16/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Montaje estructura</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Jos&eacute; Miguel D.</span></td>
+                  <td>16/04/2026</td>
+                  <td>4h</td>
+                  <td><span class="res-task">Descarga material</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Daniel G. Guti&eacute;rrez</span></td>
+                  <td>16/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Soldadura cubierta</span></td>
+                </tr>
+                <tr class="row-separator"></tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Jorge Cano D.</span></td>
+                  <td>15/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Replanteo cubierta</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Marcos Cieza F.</span></td>
+                  <td>15/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Replanteo cubierta</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Daniel G. Guti&eacute;rrez</span></td>
+                  <td>15/04/2026</td>
+                  <td>6h</td>
+                  <td><span class="res-task">Preparaci&oacute;n soldadura</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Jos&eacute; Miguel D.</span></td>
+                  <td>15/04/2026</td>
+                  <td>4h</td>
+                  <td><span class="res-task">Limpieza zona trabajo</span></td>
+                </tr>
+                <tr class="row-separator"></tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Jorge Cano D.</span></td>
+                  <td>14/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Desmontaje cubierta vieja</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Marcos Cieza F.</span></td>
+                  <td>14/04/2026</td>
+                  <td>8h</td>
+                  <td><span class="res-task">Desmontaje cubierta vieja</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="res-coste">
+              <span>Coste mano de obra estimado:</span>
+              <span class="res-coste-valor">&euro;3.187,50</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VEHICULOS -->
+        <div class="panel obra-resource-panel future-preview">
+          <div class="panel-header">
+            <h3>&#128666; Veh&iacute;culos y desplazamientos</h3>
+            <span class="badge-soon" style="font-size:0.65rem;">Pr&oacute;ximamente</span>
+          </div>
+          <div class="panel-body">
+            <div class="resource-summary">
+              <span class="res-total">2 veh&iacute;culos</span>
+              <span class="res-hours">&euro;680 imputado</span>
+            </div>
+            <table class="resource-table">
+              <thead>
+                <tr>
+                  <th style="text-align:left;">Veh&iacute;culo</th>
+                  <th>Fecha</th>
+                  <th>Km</th>
+                  <th>Coste</th>
+                  <th>Concepto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Cami&oacute;n gr&uacute;a Mercedes</span><br><span class="res-plate">0895-BFP</span></td>
+                  <td>16/04/2026</td>
+                  <td>45</td>
+                  <td>&euro;185</td>
+                  <td><span class="res-task">Transporte panel</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Cami&oacute;n gr&uacute;a Mercedes</span><br><span class="res-plate">0895-BFP</span></td>
+                  <td>14/04/2026</td>
+                  <td>45</td>
+                  <td>&euro;185</td>
+                  <td><span class="res-task">Transporte estructura</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Furgoneta Toyota</span><br><span class="res-plate">2934-CCX</span></td>
+                  <td>16/04/2026</td>
+                  <td>45</td>
+                  <td>&euro;65</td>
+                  <td><span class="res-task">Operarios + herram.</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Furgoneta Toyota</span><br><span class="res-plate">2934-CCX</span></td>
+                  <td>15/04/2026</td>
+                  <td>45</td>
+                  <td>&euro;65</td>
+                  <td><span class="res-task">Operarios + herram.</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Furgoneta Toyota</span><br><span class="res-plate">2934-CCX</span></td>
+                  <td>14/04/2026</td>
+                  <td>45</td>
+                  <td>&euro;65</td>
+                  <td><span class="res-task">Operarios + herram.</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;"><span class="res-name">Furgoneta Toyota</span><br><span class="res-plate">2934-CCX</span></td>
+                  <td>11/04/2026</td>
+                  <td>90</td>
+                  <td>&euro;115</td>
+                  <td><span class="res-task">Recogida material Ebora (Toledo)</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="res-coste">
+              <span>Total desplazamientos imputados:</span>
+              <span class="res-coste-valor">&euro;680,00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Documentos de la obra -->
+      <div class="obra-docs-section">
+        <div class="page-header" style="margin-top:24px;">
+          <h3>Documentos de la obra</h3>
+          <div class="docs-upload-btn">
+            <button class="btn-primary">+ Subir documentos</button>
+          </div>
+        </div>
+
+        <!-- Zona de drop -->
+        <div class="drop-zone">
+          <div class="drop-zone-icon">&#128194;</div>
+          <div class="drop-zone-text">Arrastra archivos aqu&iacute; o <span class="drop-zone-link">selecciona del ordenador</span></div>
+          <div class="drop-zone-hint">PDF, JPG, PNG, XLSX &mdash; M&aacute;x. 25MB por archivo</div>
+          <div class="drop-zone-category">
+            <label>Categor&iacute;a:</label>
+            <select>
+              <option>Facturas y albaranes</option>
+              <option>Fotos de obra</option>
+              <option>Licencias y permisos</option>
+              <option>Planes de seguridad</option>
+              <option>Presupuestos</option>
+              <option>Certificados</option>
+              <option>Documentaci&oacute;n final</option>
+              <option>Otros</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid de categorías con archivos -->
+        <div class="docs-categories-grid">
+
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#128452;</span>
+              <span class="doc-cat-name">Facturas y albaranes</span>
+              <span class="doc-cat-count">6 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">Saltoki_fra_2026-0341.pdf</div>
+                  <div class="file-meta">14/04/2026 &middot; 245 KB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">Danosa_albaran_ALB-1204.pdf</div>
+                  <div class="file-meta">10/04/2026 &middot; 189 KB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">Ebora_aluminio_fra_0847.pdf</div>
+                  <div class="file-meta">08/04/2026 &middot; 312 KB &middot; Watcher autom&aacute;tico</div>
+                </div>
+              </div>
+              <div class="doc-file more-files">+ 3 archivos m&aacute;s</div>
+            </div>
+          </div>
+
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#128247;</span>
+              <span class="doc-cat-name">Fotos de obra</span>
+              <span class="doc-cat-count">12 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-file">
+                <span class="file-icon img">JPG</span>
+                <div class="file-info">
+                  <div class="file-name">cubierta_fase2_frontal.jpg</div>
+                  <div class="file-meta">16/04/2026 &middot; 3.2 MB &middot; Subido por Marcos</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon img">JPG</span>
+                <div class="file-info">
+                  <div class="file-name">cubierta_fase2_lateral.jpg</div>
+                  <div class="file-meta">16/04/2026 &middot; 2.8 MB &middot; Subido por Marcos</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon img">JPG</span>
+                <div class="file-info">
+                  <div class="file-name">estado_inicial_cubierta.jpg</div>
+                  <div class="file-meta">15/01/2026 &middot; 4.1 MB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+              <div class="doc-file more-files">+ 9 archivos m&aacute;s</div>
+            </div>
+          </div>
+
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#128220;</span>
+              <span class="doc-cat-name">Licencias y permisos</span>
+              <span class="doc-cat-count">2 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">licencia_obra_ayto_jaje.pdf</div>
+                  <div class="file-meta">20/12/2025 &middot; 1.1 MB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">permiso_ocupacion_via_publica.pdf</div>
+                  <div class="file-meta">10/01/2026 &middot; 520 KB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#9888;</span>
+              <span class="doc-cat-name">Planes de seguridad</span>
+              <span class="doc-cat-count">1 archivo</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">plan_seguridad_salud_jaje.pdf</div>
+                  <div class="file-meta">05/01/2026 &middot; 2.4 MB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#128196;</span>
+              <span class="doc-cat-name">Presupuestos</span>
+              <span class="doc-cat-count">2 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-file">
+                <span class="file-icon pdf">PDF</span>
+                <div class="file-info">
+                  <div class="file-name">presupuesto_P-2025-089_firmado.pdf</div>
+                  <div class="file-meta">10/12/2025 &middot; 890 KB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+              <div class="doc-file">
+                <span class="file-icon xls">XLS</span>
+                <div class="file-info">
+                  <div class="file-name">mediciones_cubierta_jaje.xlsx</div>
+                  <div class="file-meta">08/12/2025 &middot; 156 KB &middot; Subido por Juan Ram&oacute;n</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-category empty">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#127942;</span>
+              <span class="doc-cat-name">Certificados</span>
+              <span class="doc-cat-count">0 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-empty">Sin documentos &mdash; <span class="drop-zone-link">subir</span></div>
+            </div>
+          </div>
+
+          <div class="doc-category empty">
+            <div class="doc-category-header">
+              <span class="doc-cat-icon">&#128203;</span>
+              <span class="doc-cat-name">Documentaci&oacute;n final</span>
+              <span class="doc-cat-count">0 archivos</span>
+            </div>
+            <div class="doc-file-list">
+              <div class="doc-empty">Sin documentos &mdash; <span class="drop-zone-link">subir</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: OPERARIOS (Proximamente) ========== -->
+    <section class="screen" id="screen-operarios">
+      <div class="page-header">
+        <h2>Operarios</h2>
+      </div>
+      <div class="coming-soon-screen">
+        <div class="coming-soon-overlay">
+          <div class="cs-icon">&#128119;</div>
+          <h3>M&oacute;dulo Operarios &mdash; Pr&oacute;ximamente</h3>
+          <p>Gesti&oacute;n de personal, cursos de formaci&oacute;n, documentaci&oacute;n PRL y asignaci&oacute;n a obras</p>
+        </div>
+        <div class="coming-soon-preview">
+          <div class="panel">
+            <div class="panel-body table-wrapper">
+              <table>
+                <thead>
+                  <tr><th>Nombre</th><th>DNI</th><th>Empresa</th><th>Categor&iacute;a</th><th>Obra asignada</th><th>PRL</th><th>Cursos</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Carlos Mart&iacute;nez R.</td><td>12345678A</td><td>Solutal</td><td>Oficial 1&ordf;</td><td>Polideportivo El Jaje</td><td>Vigente</td><td>3/3</td></tr>
+                  <tr><td>Miguel &Aacute;ngel P&eacute;rez</td><td>23456789B</td><td>Solutal</td><td>Pe&oacute;n</td><td>Dorseran Barajas</td><td>Vigente</td><td>2/3</td></tr>
+                  <tr><td>Francisco J. L&oacute;pez</td><td>34567890C</td><td>Aplital</td><td>Oficial 2&ordf;</td><td>CEIP Fuensalida</td><td>Caducado</td><td>1/3</td></tr>
+                  <tr><td>Antonio Garc&iacute;a S.</td><td>45678901D</td><td>Solutal</td><td>Encargado</td><td>Terraza Trinidad</td><td>Vigente</td><td>3/3</td></tr>
+                  <tr><td>Jes&uacute;s Hern&aacute;ndez</td><td>56789012E</td><td>CCV</td><td>T&eacute;cnico</td><td>Mercanza</td><td>Vigente</td><td>3/3</td></tr>
+                  <tr><td>David Ruiz M.</td><td>67890123F</td><td>Solutal</td><td>Pe&oacute;n</td><td>Polideportivo El Jaje</td><td>Vigente</td><td>2/3</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: VEHICULOS (Proximamente) ========== -->
+    <section class="screen" id="screen-vehiculos">
+      <div class="page-header">
+        <h2>Veh&iacute;culos</h2>
+      </div>
+      <div class="coming-soon-screen">
+        <div class="coming-soon-overlay">
+          <div class="cs-icon">&#128666;</div>
+          <h3>M&oacute;dulo Veh&iacute;culos &mdash; Pr&oacute;ximamente</h3>
+          <p>Control de flota, gastos por veh&iacute;culo, imputaci&oacute;n a obras y mantenimiento preventivo</p>
+        </div>
+        <div class="coming-soon-preview">
+          <div class="panel">
+            <div class="panel-body table-wrapper">
+              <table>
+                <thead>
+                  <tr><th>Matr&iacute;cula</th><th>Veh&iacute;culo</th><th>Empresa</th><th>Asignado a</th><th>ITV</th><th>Gasto mes</th><th>Obra</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1234 ABC</td><td>Ford Transit</td><td>Solutal</td><td>Carlos M.</td><td>Vigente</td><td>&euro;480</td><td>Polideportivo</td></tr>
+                  <tr><td>5678 DEF</td><td>Renault Master</td><td>Solutal</td><td>Miguel &Aacute;.</td><td>Vigente</td><td>&euro;320</td><td>Dorseran</td></tr>
+                  <tr><td>9012 GHI</td><td>Fiat Ducato</td><td>Aplital</td><td>Francisco J.</td><td>Caducada</td><td>&euro;560</td><td>CEIP Fuensalida</td></tr>
+                  <tr><td>3456 JKL</td><td>VW Crafter</td><td>CCV</td><td>Jes&uacute;s H.</td><td>Vigente</td><td>&euro;290</td><td>Mercanza</td></tr>
+                  <tr><td>7890 MNO</td><td>Toyota Hilux</td><td>Solutal</td><td>Antonio G.</td><td>Vigente</td><td>&euro;410</td><td>Terraza Trinidad</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: AMIANTO (Proximamente) ========== -->
+    <section class="screen" id="screen-amianto">
+      <div class="page-header">
+        <h2>Desamiantado</h2>
+      </div>
+      <div class="coming-soon-screen">
+        <div class="coming-soon-overlay">
+          <div class="cs-icon">&#9888;&#65039;</div>
+          <h3>M&oacute;dulo Desamiantado &mdash; Pr&oacute;ximamente</h3>
+          <p>Gesti&oacute;n RERA, planes de trabajo, documentaci&oacute;n regulatoria y seguimiento de obras de retirada de amianto</p>
+        </div>
+        <div class="coming-soon-preview">
+          <div class="panel">
+            <div class="panel-body table-wrapper">
+              <table>
+                <thead>
+                  <tr><th>Obra</th><th>RERA</th><th>Plan trabajo</th><th>Superficie m&sup2;</th><th>Estado</th><th>Vertedero</th><th>Documentaci&oacute;n</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Nave Industrial Toledo</td><td>RERA-2026-012</td><td>Aprobado</td><td>450 m&sup2;</td><td>En ejecuci&oacute;n</td><td>Autorizado</td><td>Completa</td></tr>
+                  <tr><td>Cubierta Colegio P&uacute;blico</td><td>RERA-2026-015</td><td>Pendiente</td><td>280 m&sup2;</td><td>Planificaci&oacute;n</td><td>Pendiente</td><td>Parcial</td></tr>
+                  <tr><td>Vivienda C/ Mayor 12</td><td>RERA-2026-018</td><td>Aprobado</td><td>85 m&sup2;</td><td>Finalizada</td><td>Certificado</td><td>Completa</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN: CONFIGURACION (Proximamente) ========== -->
+    <section class="screen" id="screen-config">
+      <div class="page-header">
+        <h2>Configuraci&oacute;n</h2>
+      </div>
+      <div class="coming-soon-screen" style="min-height:300px;">
+        <div class="coming-soon-overlay">
+          <div class="cs-icon">&#9881;</div>
+          <h3>Configuraci&oacute;n &mdash; Pr&oacute;ximamente</h3>
+          <p>Gesti&oacute;n de usuarios, permisos, empresas del grupo y par&aacute;metros generales del sistema</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

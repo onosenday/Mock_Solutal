@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutal - Estimacion por Modulos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #273548;
+      --primary: #3b82f6;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 2rem; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .header { text-align: center; margin-bottom: 3rem; }
+    .header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .header h1 span { color: var(--primary); }
+    .header .subtitle { color: var(--muted); font-size: 1rem; }
+    .header .date { color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
+
+    .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+    .summary-card { background: var(--surface); border-radius: 12px; padding: 1.5rem; text-align: center; border: 1px solid var(--border); }
+    .summary-card .value { font-size: 2rem; font-weight: 800; color: var(--primary); }
+    .summary-card .label { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+    .module { background: var(--surface); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.25rem; border: 1px solid var(--border); position: relative; overflow: hidden; }
+    .module.base { border-left: 4px solid var(--primary); }
+    .module.core { border-left: 4px solid var(--accent); }
+    .module.future { border-left: 4px solid var(--warning); opacity: 0.75; }
+
+    .module-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .module-title { font-size: 1.2rem; font-weight: 700; }
+    .module-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .badge-base { background: rgba(59,130,246,0.15); color: var(--primary); }
+    .badge-core { background: rgba(16,185,129,0.15); color: var(--accent); }
+    .badge-future { background: rgba(245,158,11,0.15); color: var(--warning); }
+
+    .module-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+
+    .module-includes { margin-bottom: 1rem; }
+    .module-includes h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
+    .module-includes ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .module-includes li { background: var(--surface2); padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.8rem; color: var(--text); }
+
+    .module-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .module-time { display: flex; align-items: center; gap: 0.5rem; }
+    .module-time .hours { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+    .module-time .label { font-size: 0.8rem; color: var(--muted); }
+    .module-deps { font-size: 0.8rem; color: var(--muted); }
+    .module-deps span { color: var(--primary); font-weight: 600; }
+
+    .bar-container { width: 200px; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-fill.base { background: var(--primary); }
+    .bar-fill.core { background: var(--accent); }
+    .bar-fill.future { background: var(--warning); }
+
+    .roadmap { margin-top: 3rem; }
+    .roadmap h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; }
+    .roadmap-track { display: flex; gap: 0; margin-bottom: 0.75rem; align-items: center; }
+    .roadmap-label { width: 200px; font-size: 0.8rem; color: var(--muted); flex-shrink: 0; text-align: right; padding-right: 1rem; }
+    .roadmap-bar { height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: white; min-width: 40px; }
+    .roadmap-bar.base { background: var(--primary); }
+    .roadmap-bar.core { background: var(--accent); }
+    .roadmap-bar.future { background: var(--warning); }
+    .roadmap-spacer { flex-shrink: 0; }
+
+    .timeline-header { display: flex; margin-bottom: 0.5rem; padding-left: 200px; }
+    .timeline-header span { flex: 1; font-size: 0.7rem; color: var(--muted); text-align: center; }
+
+    .notes { margin-top: 3rem; background: var(--surface); border-radius: 12px; padding: 1.75rem; border: 1px solid var(--border); }
+    .notes h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    .notes ul { list-style: none; }
+    .notes li { padding: 0.4rem 0; color: var(--muted); font-size: 0.85rem; }
+    .notes li::before { content: "~"; color: var(--primary); font-weight: 700; margin-right: 0.5rem; }
+
+    .legend { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+    .legend-dot.base { background: var(--primary); }
+    .legend-dot.core { background: var(--accent); }
+    .legend-dot.future { background: var(--warning); }
+
+    /* ===== FLOATING NAV ===== */
+    .float-nav {
+      position: fixed;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 6px;
+      max-width: 160px;
+    }
+    .float-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.72rem;
+      color: var(--muted);
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .float-nav a:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+    .float-nav a .fn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .fn-dot.base { background: var(--primary); }
+    .fn-dot.core { background: var(--accent); }
+    .fn-dot.future { background: var(--warning); }
+    .fn-dot.meta { background: #64748b; }
+
+    .float-nav .fn-sep {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 10px;
+    }
+
+    @media (max-width: 1200px) {
+      .float-nav { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1rem; }
+      .summary-row { grid-template-columns: 1fr; }
+      .module-footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .roadmap-label { width: 120px; font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="float-nav">
+  <a href="#resumen"><span class="fn-dot meta"></span> Resumen</a>
+  <div class="fn-sep"></div>
+  <a href="#mod-capa0"><span class="fn-dot base"></span> Capa 0</a>
+  <a href="#mod-facturacion"><span class="fn-dot core"></span> Facturacion</a>
+  <a href="#mod-presupuestos"><span class="fn-dot core"></span> Presupuestos</a>
+  <a href="#mod-dashboards"><span class="fn-dot core"></span> Dashboards</a>
+  <a href="#mod-obras"><span class="fn-dot core"></span> Obras</a>
+  <a href="#mod-operarios"><span class="fn-dot future"></span> Operarios</a>
+  <a href="#mod-vehiculos"><span class="fn-dot future"></span> Vehiculos</a>
+  <a href="#mod-amianto"><span class="fn-dot future"></span> Amianto</a>
+  <a href="#mod-migracion"><span class="fn-dot base"></span> Migracion</a>
+  <div class="fn-sep"></div>
+  <a href="#roadmap"><span class="fn-dot meta"></span> Hoja de ruta</a>
+  <a href="#notas"><span class="fn-dot meta"></span> Notas</a>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <h1><span>Solutal</span> ERP</h1>
+    <div class="subtitle">Estimacion preliminar por modulos</div>
+    <div class="date">Abril 2026 &middot; Documento de trabajo</div>
+  </div>
+
+  <div class="summary-row" id="resumen">
+    <div class="summary-card">
+      <div class="value">9</div>
+      <div class="label">Modulos totales</div>
+    </div>
+    <div class="summary-card">
+      <div class="value">220-325</div>
+      <div class="label">Horas estimadas (total)</div>
+    </div>
+    <div class="summary-card">
+      <div class="value">3</div>
+      <div class="label">Fases de entrega</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot base"></div> Cimiento (obligatorio)</div>
+    <div class="legend-item"><div class="legend-dot core"></div> Core (prioridad)</div>
+    <div class="legend-item"><div class="legend-dot future"></div> Ampliacion</div>
+  </div>
+
+  <!-- MODULE 0: CAPA 0 -->
+  <div class="module base" id="mod-capa0">
+    <div class="module-header">
+      <div class="module-title">Capa 0 &mdash; Base del sistema</div>
+      <div class="module-badge badge-base">Cimiento</div>
+    </div>
+    <div class="module-desc">
+      La base sobre la que se construye todo. Esquema de datos unificado, autenticacion,
+      gestion multi-empresa, permisos por usuario y perfil de empresa. Sin esto, nada funciona.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Base de datos unificada</li>
+        <li>6 empresas configuradas</li>
+        <li>Usuarios y permisos</li>
+        <li>Multi-empresa con perfiles</li>
+        <li>API base</li>
+        <li>Autenticacion segura</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">25-35</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill base" style="width:13%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Ninguna</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 1: FACTURACION -->
+  <div class="module core" id="mod-facturacion">
+    <div class="module-header">
+      <div class="module-title">Facturacion completa</div>
+      <div class="module-badge badge-core">Core</div>
+    </div>
+    <div class="module-desc">
+      Facturas recibidas (evolucion de FactuBat actual) + facturas emitidas con seguimiento de cobro.
+      Bandeja de entrada con extraccion IA, validacion, cobros parciales, rectificativas y vencimientos.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Bandeja de entrada (FactuBat)</li>
+        <li>Extraccion LLM (ya existe)</li>
+        <li>Facturas recibidas</li>
+        <li>Facturas emitidas</li>
+        <li>Cobros parciales (1:N)</li>
+        <li>3 tipos de cliente</li>
+        <li>Firma obra publica</li>
+        <li>Vencimientos</li>
+        <li>Rectificativas</li>
+        <li>FacturaE / FACE</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">35-50</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill core" style="width:18%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 2: PRESUPUESTOS -->
+  <div class="module core" id="mod-presupuestos">
+    <div class="module-header">
+      <div class="module-title">Gestion de presupuestos</div>
+      <div class="module-badge badge-core">Core</div>
+    </div>
+    <div class="module-desc">
+      Ciclo de vida completo del presupuesto: desde borrador hasta conversion en obra.
+      Seguimiento de estados, tasa de conversion y vinculacion con obras.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Crear y editar presupuestos</li>
+        <li>Estados (borrador, enviado, aceptado, rechazado)</li>
+        <li>Conversion a obra</li>
+        <li>Tasa de conversion</li>
+        <li>Historial por cliente</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">15-25</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill core" style="width:9%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 3: DASHBOARDS -->
+  <div class="module core" id="mod-dashboards">
+    <div class="module-header">
+      <div class="module-title">Dashboards de visibilidad</div>
+      <div class="module-badge badge-core">Core</div>
+    </div>
+    <div class="module-desc">
+      Vista consolidada del estado real del grupo. Dashboard de grupo, por empresa,
+      resumen de obras y dashboard individual por obra con gastos vs ingresos.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Dashboard grupo</li>
+        <li>Dashboard empresa</li>
+        <li>Dashboard obras (pipeline)</li>
+        <li>Dashboard obra individual</li>
+        <li>Cobros pendientes</li>
+        <li>Margen por obra</li>
+        <li>Alertas y vencimientos</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">25-35</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill core" style="width:13%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 + Facturacion</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 4: OBRAS -->
+  <div class="module core" id="mod-obras">
+    <div class="module-header">
+      <div class="module-title">Gestion de obras</div>
+      <div class="module-badge badge-core">Core</div>
+    </div>
+    <div class="module-desc">
+      Ciclo de vida completo de una obra: desde presupuesto hasta cobro final.
+      Estados, imputacion de gastos (facturas, albaranes, desplazamientos), documentacion y plazos.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Estados de obra</li>
+        <li>Albaranes</li>
+        <li>Imputacion gastos a obra</li>
+        <li>Gestion documental por obra</li>
+        <li>Hitos y plazos</li>
+        <li>Fotos de obra</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">35-50</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill core" style="width:18%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 + Facturacion + Presupuestos</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 5: OPERARIOS -->
+  <div class="module future" id="mod-operarios">
+    <div class="module-header">
+      <div class="module-title">Operarios</div>
+      <div class="module-badge badge-future">Ampliacion</div>
+    </div>
+    <div class="module-desc">
+      Gestion de personal: documentacion, cursos de formacion con fechas de caducidad,
+      prevencion de riesgos, reconocimientos medicos y asignacion a obras.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Ficha de operario</li>
+        <li>Cursos y caducidades</li>
+        <li>PRL y EPIs</li>
+        <li>Reconocimientos medicos</li>
+        <li>Asignacion a obras</li>
+        <li>Alertas de vencimiento</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">20-30</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill future" style="width:11%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 + Obras</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 6: VEHICULOS -->
+  <div class="module future" id="mod-vehiculos">
+    <div class="module-header">
+      <div class="module-title">Vehiculos y maquinaria</div>
+      <div class="module-badge badge-future">Ampliacion</div>
+    </div>
+    <div class="module-desc">
+      Control de flota: documentacion por vehiculo, seguros, gastos de combustible
+      e imputacion de desplazamientos a obras para calculo de rentabilidad real.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Ficha de vehiculo</li>
+        <li>Seguros y vencimientos</li>
+        <li>Gastos por vehiculo</li>
+        <li>Imputacion a obras</li>
+        <li>Kilometraje</li>
+        <li>Alertas ITV/seguros</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">15-25</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill future" style="width:9%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 + Obras</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 7: AMIANTO -->
+  <div class="module future" id="mod-amianto">
+    <div class="module-header">
+      <div class="module-title">Desamiantado (regulatorio)</div>
+      <div class="module-badge badge-future">Ampliacion</div>
+    </div>
+    <div class="module-desc">
+      Modulo especializado para Solutal: gestion RERA, las 9 secciones obligatorias por obra de amianto,
+      documentacion de trabajadores, vertederos autorizados y trazabilidad de residuos.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>9 secciones regulatorias</li>
+        <li>Registro RERA</li>
+        <li>Doc. trabajadores por obra</li>
+        <li>Gestion de residuos</li>
+        <li>Vertederos autorizados</li>
+        <li>Checklist de cumplimiento</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">25-35</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill future" style="width:13%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 + Obras + Operarios</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 8: MIGRACION -->
+  <div class="module base" id="mod-migracion">
+    <div class="module-header">
+      <div class="module-title">Migracion de datos existentes</div>
+      <div class="module-badge badge-base">Cimiento</div>
+    </div>
+    <div class="module-desc">
+      Programa de migracion automatica que lee la estructura de carpetas existente (S:\)
+      y la importa al nuevo sistema: empresas, proveedores, obras, documentos y facturas historicas.
+    </div>
+    <div class="module-includes">
+      <h4>Incluye</h4>
+      <ul>
+        <li>Lectura del arbol de carpetas</li>
+        <li>Clasificacion automatica de documentos</li>
+        <li>Importacion de proveedores</li>
+        <li>Importacion de obras y estados</li>
+        <li>Vinculacion documentos a obras</li>
+        <li>Facturas historicas (FactuBat)</li>
+        <li>Informe de migracion</li>
+        <li>Validacion y rollback</li>
+      </ul>
+    </div>
+    <div class="module-footer">
+      <div class="module-time">
+        <div class="hours">25-40</div>
+        <div class="label">horas</div>
+      </div>
+      <div>
+        <div class="bar-container"><div class="bar-fill base" style="width:14%"></div></div>
+      </div>
+      <div class="module-deps">Dependencias: <span>Capa 0 (se ejecuta por fases seg&uacute;n m&oacute;dulos contratados)</span></div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="roadmap" id="roadmap">
+    <h2>Hoja de ruta sugerida</h2>
+
+    <div class="timeline-header">
+      <span>0-35h</span>
+      <span>35-85h</span>
+      <span>85-145h</span>
+      <span>145-195h</span>
+      <span>195-285h</span>
+    </div>
+
+    <div class="roadmap-track">
+      <div class="roadmap-label">Capa 0 (25-35h)</div>
+      <div class="roadmap-bar base" style="width:16%;">25-35h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Facturacion (35-50h)</div>
+      <div class="roadmap-spacer" style="width:12%;"></div>
+      <div class="roadmap-bar core" style="width:22%;">35-50h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Presupuestos (15-25h)</div>
+      <div class="roadmap-spacer" style="width:12%;"></div>
+      <div class="roadmap-bar core" style="width:12%;">15-25h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Dashboards (25-35h)</div>
+      <div class="roadmap-spacer" style="width:30%;"></div>
+      <div class="roadmap-bar core" style="width:16%;">25-35h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Obras (35-50h)</div>
+      <div class="roadmap-spacer" style="width:30%;"></div>
+      <div class="roadmap-bar core" style="width:22%;">35-50h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Operarios (20-30h)</div>
+      <div class="roadmap-spacer" style="width:60%;"></div>
+      <div class="roadmap-bar future" style="width:14%;">20-30h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Vehiculos (15-25h)</div>
+      <div class="roadmap-spacer" style="width:60%;"></div>
+      <div class="roadmap-bar future" style="width:12%;">15-25h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Amianto (25-35h)</div>
+      <div class="roadmap-spacer" style="width:74%;"></div>
+      <div class="roadmap-bar future" style="width:16%;">25-35h</div>
+    </div>
+    <div class="roadmap-track">
+      <div class="roadmap-label">Migracion (25-40h)</div>
+      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+      <div class="roadmap-spacer" style="width:2%;"></div>
+      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+      <div class="roadmap-spacer" style="width:2%;"></div>
+      <div class="roadmap-bar base" style="width:10%; opacity:0.5;">&#9679;</div>
+    </div>
+    <div style="padding-left:200px; font-size:0.68rem; color:#64748b; margin-top:-4px; margin-bottom:12px;">
+      &uarr; Se ejecuta por fases: migra los datos de cada m&oacute;dulo cuando se entrega
+    </div>
+
+    <div style="text-align:center; margin-top:1.5rem;">
+      <div style="display:inline-flex; gap:2rem; font-size:0.8rem; color:var(--muted);">
+        <div><strong style="color:var(--primary);">Fase 1</strong> &mdash; 75-110h &middot; Base + Facturacion + Presupuestos</div>
+        <div><strong style="color:var(--accent);">Fase 2</strong> &mdash; 60-85h &middot; Dashboards + Obras</div>
+        <div><strong style="color:var(--warning);">Fase 3</strong> &mdash; 60-90h &middot; Ampliaciones</div>
+      </div>
+      <div style="margin-top:8px; font-size:0.75rem; color:#64748b;">
+        + 25-40h de migraci&oacute;n (transversal a todas las fases)
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes" id="notas">
+    <h3>Notas importantes</h3>
+    <ul>
+      <li>La <strong>Capa 0</strong> va incluida en cualquier modulo que se contrate. No tiene coste separado.</li>
+      <li>Las horas son de <strong>desarrollo efectivo</strong>. No incluyen reuniones de requisitos, formacion ni soporte post-entrega.</li>
+      <li>Los modulos de <strong>Fase 2</strong> (Dashboards y Obras) pueden desarrollarse en paralelo con solapamiento.</li>
+      <li>Los modulos de <strong>Ampliacion</strong> son independientes entre si y pueden contratarse en cualquier orden.</li>
+      <li>Cada modulo se entrega con <strong>datos migrados</strong> desde las carpetas existentes cuando sea aplicable.</li>
+      <li>El interfaz es <strong>unico desde el dia uno</strong>: al activar un modulo nuevo, aparece en el mismo sitio sin cambios de navegacion.</li>
+      <li>Existen <strong>modulos especificos por empresa</strong> (ej: recetas y escandallos para Jardin 1900, gases refrigerantes para CCV) que estan pendientes de definir en requisitos y funcionalidades. Se presupuestaran por separado.</li>
+      <li>Estimaciones sujetas a revision tras la fase de requisitos detallados con el cliente.</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
